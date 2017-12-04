@@ -8,7 +8,7 @@ This section details steps for installing and running MetaLonDA. If you experien
 
 ## Prerequisites
 
-* R(>= 3.1.2)
+* R(>= 3.2.0)
 
 
 ## Installing, Testing, and Running
