@@ -1,9 +1,6 @@
 # What is MetaLonDA?
-MetaLonDA METAgenomic LONgitudinal Differential Abundance method) is a method that identify the significant time intervals of microbial features in longitudianl studies. MetaLonDA has the ability to handle the inconsistencies and common challenges associated with human studies, such as variable sample collection times and uneven number of time points along the subjects’ longitudinal study. The method employs a negative binomial distribution in conjunction with  a semi-parametric SS-ANOVA to model the count reads. MetaLonDA performs the significance testing based on unit time intervals.
+MetaLonDA METAgenomic LONgitudinal Differential Abundance method) is a method that identify the significant time intervals of microbial features in longitudianl studies. MetaLonDA has the ability to handle the inconsistencies and common challenges associated with human studies, such as variable sample collection times and uneven number of time points along the subjectsâ€™ longitudinal study. The method employs a negative binomial distribution in conjunction with  a semi-parametric SS-ANOVA to model the count reads. MetaLonDA performs the significance testing based on unit time intervals.
 
-
-### Publication:
-Ahmed A. Metwally, Patricia W. Finn, Yang Dai, and David L. Perkins. "Detection of Differential Abundance Intervals in Longitudinal Metagenomic Data Using Negative Binomial Smoothing Spline ANOVA." ACM BCB (2017)
 
 
 # Getting Started
