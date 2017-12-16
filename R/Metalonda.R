@@ -1,6 +1,6 @@
-#' Metagenomic Longitudinal Differential Abundant Analysis for one feature
+#' Metagenomic Longitudinal Differential Abundance Analysis for one feature
 #'
-#' Find significant time intervals of the feature
+#' Find significant time intervals of the one feature
 #' 
 #' @param Count matrix has the number of reads that mapped to each feature in each sample.
 #' @param Time vector of the time label of each sample.
@@ -22,16 +22,16 @@
 #' Ahmed Metwally (ametwa2@uic.edu)
 #' @examples 
 #' data(metalonda_test_data)
-#' n.sample = 5 # sample size;
-#' n.timepoints = 10 # time point;
-#' n.group= 2 # number of group;
-#' Group = factor(c(rep(0,n.sample*n.timepoints), rep(1,n.sample*n.timepoints)))
+#' n.sample = 5
+#' n.timepoints = 10
+#' n.group = 2
+#' Group = factor(c(rep(0, n.sample*n.timepoints), rep(1,n.sample*n.timepoints)))
 #' Time = rep(rep(1:n.timepoints, times = n.sample), 2)
 #' ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 #' points = seq(1, 10, length.out = 10)
-#' output_1_nbinomial = metalonda(Count = metalonda_test_data[1,], Time = Time, Group = Group,
+#' output.nbinomial = metalonda(Count = metalonda_test_data[1,], Time = Time, Group = Group,
 #' ID = ID, fit.method =  "nbinomial", n.perm = 10, points = points,
-#' text=rownames(metalonda_test_data)[1], parall = FALSE, pvalue.threshold=0.05, adjust.method="BH")
+#' text = rownames(metalonda_test_data)[1], parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH")
 #' @export
 metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomial", 
                       points, text = 0, parall = FALSE, pvalue.threshold = 0.05, 
@@ -54,7 +54,7 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
   aggregate.df = data.frame(Count = Count, Time = Time, Group = Group, ID = ID)
   
 
-  # Visualize feature's abundance accross different time points  
+  ## Visualize feature's abundance accross different time points  
   visualizeFeature(aggregate.df, text, group.levels, unit = time.unit)
 
 
@@ -88,16 +88,16 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
         })
   }
   
-  # Visualize feature's trajectories spline
+  ## Visualize feature's trajectories spline
   visualizeFeatureSpline(aggregate.df, model, fit.method, text, group.levels, unit = time.unit)
  
    
   ## Calculate area under the fitted curve for each time interval
-  cat("Calculate area under the fitted curves \n")
+  cat("Calculate Area Under the Fitted Curves \n")
   area = intervalArea(model)
   
   
-  ### Run in Parallel
+  ## Run in Parallel
   if(parall == TRUE) {
     max.cores = detectCores()
     desired.cores = max.cores - 1		
@@ -110,7 +110,7 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
   cat("Start Permutation \n")
   perm  = permutation(aggregate.df, n.perm, fit.method, points, lev = group.levels)
   
-  ### Area p-value per unit interval
+  ## Area p-value per unit interval
   area.perm = areaPermutation(perm)
 
 
@@ -122,7 +122,7 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
   a2 = do.call(rbind, a1[,2])
 
   ##  Visualize AR empirical distribution
-  visualizeARHistogram(a2, text, fit.method)
+  #visualizeARHistogram(a2, text, fit.method)
   
   ## Calculate AR p-value 
   pvalue.area = sapply(1:(length(points)-1), function(i){
@@ -131,8 +131,8 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
 
 
 
-  ### Identify significant time inetrval based on the adjusted p-value 
-  cat("p-value adjustment method = ", adjust.method, "\n")
+  ## Identify significant time inetrval based on the adjusted p-value 
+  cat("p-value Adjustment Method = ", adjust.method, "\n")
   adjusted.pvalue = p.adjust(pvalue.area, method = adjust.method)
   interval = findSigInterval(adjusted.pvalue, threshold = pvalue.threshold, sign = area$ar.sign)
   st = points[interval$start]
@@ -176,20 +176,33 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
 #' @return Returns a list of the significant features a long with their significant time intervals
 #' @references
 #' Ahmed Metwally (ametwa2@uic.edu)
+#' @examples 
+#' data(metalonda_test_data)
+#' n.sample = 5
+#' n.timepoints = 10
+#' n.group = 2
+#' Group = factor(c(rep(0, n.sample*n.timepoints), rep(1,n.sample*n.timepoints)))
+#' Time = rep(rep(1:n.timepoints, times = n.sample), 2)
+#' ID = factor(rep(1:(2*n.sample), each = n.timepoints))
+#' points = seq(1, 10, length.out = 10)
+#' output.nbinomial = metalondaAll(Count = metalonda_test_data, Time = Time, Group = Group,
+#' ID = ID, n.perm = 10, fit.method =  "nbinomial", num.intervals = 100, 
+#' parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH", time.unit = "hours", norm.method = "none",
+#' prefix = "Test")
 #' @export
 metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
                          fit.method = "nbinomial", num.intervals = 100, parall = FALSE, 
                          pvalue.threshold = 0.05, adjust.method = "BH", time.unit = "days", 
                          norm.method = "none", prefix = "Output")
 {
-  ### Check the dimentions of the annotation vectors and count matrix
+  ## Check the dimentions of the annotation vectors and count matrix
   if(length(Time) == length(ID))
   {
     if(ncol(Count) == length(Group))
     {
       if(length(Time) == length(Group))
       {
-        cat("dimentionality check passed")
+        cat("Dimensionality check passed\n")
       } else
       {
         stop("The length of the annotation vectors don't match or not consistent 
@@ -219,13 +232,17 @@ metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
     }
   }
   
-  ### Specify the test/prediction timepoints for metalonda
+  ## Specify the test/prediction timepoints for metalonda
   if(num.intervals == "none")
-    points = floor(seq(min(Time), max(Time)))
+    #points = floor(seq(min(Time), max(Time)))
+    points = seq(min(Time), max(Time))
   else
-    points = floor(seq(min(Time), max(Time), length.out = num.intervals + 1))
+    #points = floor(seq(min(Time), max(Time), length.out = num.intervals + 1))
+    points = seq(min(Time), max(Time), length.out = num.intervals + 1)
   
-
+  cat("Points = ")
+  print(points)
+  cat("\n")
   
   ## Filter out the taxa that always have zero of one/both group
   group.levels = sort(unique(Group))
@@ -237,12 +254,21 @@ metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
   
   q = Count[,which(ID %in% ID[which(Group == gr.1)])]
   w = Count[,which(ID %in% ID[which(Group == gr.2)])]
-  data.count.filt = Count[-which(apply(q, 1, sum) == 0 | apply(w, 1, sum) == 0), ]
+  rm = which(apply(q, 1, sum) == 0 | apply(w, 1, sum) == 0)
+  
+  if(length(rm) == 0)
+  {
+    data.count.filt = Count
+  } else
+  {
+    data.count.filt = Count[-rm, ]
+  }
+  
   data.count.filt = as.matrix(data.count.filt)
   
   
   
-  #### Apply metalonda for each feature
+  ## Apply metalonda for each feature
   n.features = nrow(data.count.filt)
   detailed = list()
   summary = list()
@@ -262,8 +288,8 @@ metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
   summary.tmp$dominant[which(summary.tmp$dominant == -1)] = gr.2
   
   ## Output table and figure that summarize the significant time intervals
-  write.csv(summary.tmp, file = sprintf("%s_MetaLonDA_p%s.csv", prefix, n.perm), row.names = FALSE)
-  visualizeTimeIntervals(interval.details = summary.tmp, prefix)
+  write.csv(summary.tmp, file = sprintf("%s_MetaLonDA_TimeIntervals.csv", prefix), row.names = FALSE)
+  visualizeTimeIntervals(interval.details = summary.tmp, prefix, unit = time.unit)
   
   return(list(output.detail = detailed, output.summary = summary.tmp))
 }

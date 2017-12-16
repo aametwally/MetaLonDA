@@ -13,10 +13,10 @@
 #' Ahmed Metwally (ametwa2@uic.edu)
 #' @examples 
 #' data(metalonda_test_data)
-#' n.sample = 5 # sample size;
-#' n.timepoints = 10 # time point;
-#' n.group= 2 # number of group;
-#' Group = factor(c(rep(0,n.sample*n.timepoints), rep(1,n.sample*n.timepoints)))
+#' n.sample = 5
+#' n.timepoints = 10
+#' n.group = 2
+#' Group = factor(c(rep(0, n.sample*n.timepoints), rep(1, n.sample*n.timepoints)))
 #' Time = rep(rep(1:n.timepoints, times = n.sample), 2)
 #' ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 #' points = seq(1, 10, length.out = 10)
@@ -37,10 +37,11 @@ visualizeFeature = function (df, text, group.levels, unit = "days")
           axis.text.y = element_text(colour="black", size=12, angle=0, hjust=0.5, vjust=0.5, face="bold"),
           axis.title.x = element_text(colour="black", size=15, angle=0, hjust=.5, vjust=0.5, face="bold"),
           axis.title.y = element_text(colour="black", size=15, angle=90, hjust=.5, vjust=.5, face="bold"),
-          legend.text=element_text(size=15, face="plain"), legend.title = element_blank()) +
+          legend.text=element_text(size=15, face="plain"), legend.title = element_blank(), 
+          plot.title = element_text(hjust = 0.5)) +
     theme(legend.position="top") + scale_x_continuous(breaks = waiver())
 
-  ggsave(filename=paste("Feature_", text, ".tiff", sep=""), dpi = 300, height = 10, width = 15, units = 'cm')
+  ggsave(filename=paste("Feature_", text, ".jpg", sep=""), dpi = 1200, height = 10, width = 15, units = 'cm')
 }
 
 
@@ -63,7 +64,7 @@ visualizeFeature = function (df, text, group.levels, unit = "days")
 #' @export
 visualizeFeatureSpline = function (df, model, method, text, group.levels, unit = "days")
 { 
-  cat("Visualizing the Splines of Feature =  ", text, "\n")
+  cat("Visualizing the Splines of Feature = ", text, "\n")
     
   Count=0;Time=0;ID=0;Group=0;lnn=0 ## This line is just to pass the CRAN checks for the aes in ggplot2
   dd.null = model$dd.null
@@ -78,7 +79,7 @@ visualizeFeatureSpline = function (df, model, method, text, group.levels, unit =
   
   p = ggplot(dm, aes(Time, Count, colour = Group, group = interaction(Group, ID)))
   p = p + theme_bw() + geom_point(size=1, alpha=0.5) + geom_line(aes(linetype=lnn), size=1, alpha=0.5) + 
-    ggtitle(paste("Feature = ", text, " '", method, "'", sep = "")) + labs(y = "Normalized Count", x = sprintf("Time (%s)", unit)) +
+    ggtitle(paste("Feature = ", text, sep = "")) + labs(y = "Normalized Count", x = sprintf("Time (%s)", unit)) +
     scale_colour_manual(values = c("skyblue", "pink", "blue", "firebrick",
                                    "blue",  "blue",  "firebrick", "firebrick"), 
                         breaks = c("0", "1", "fit.0", "fit.1"),
@@ -87,10 +88,11 @@ visualizeFeatureSpline = function (df, model, method, text, group.levels, unit =
           axis.text.y = element_text(colour="black", size=12, angle=0, hjust=0.5, vjust=0.5, face="bold"),
           axis.title.x = element_text(colour="black", size=15, angle=0, hjust=.5, vjust=0.5, face="bold"),
           axis.title.y = element_text(colour="black", size=15, angle=90, hjust=.5, vjust=.5, face="bold"), 
-          legend.text=element_text(size=15, face="plain"), legend.title = element_blank()) +
+          legend.text=element_text(size=15, face="plain"), legend.title = element_blank(),
+          plot.title = element_text(hjust = 0.5)) +
     theme(legend.position="top") + scale_x_continuous(breaks = waiver()) + guides(linetype=FALSE, size =FALSE)
   
-  ggsave(filename=paste("Feature_", text, "_CurveFitting_", method, ".tiff", sep=""), dpi = 300, height = 10, width = 15, units = 'cm')
+  ggsave(filename=paste("Feature_", text, "_CurveFitting_", method, ".jpg", sep=""), dpi = 1200, height = 10, width = 15, units = 'cm')
 }
 
 
@@ -108,11 +110,11 @@ visualizeFeatureSpline = function (df, model, method, text, group.levels, unit =
 #' Ahmed Metwally (ametwa2@uic.edu)
 #' @export
 visualizeARHistogram = function(permuted, text, method){
-  cat("Visualizing AR distribution of each time interval for feature = ", text, "\n")
+  cat("Visualizing AR Distribution for Feature = ", text, "\n")
   n = ncol(permuted)
   r = ceiling(sqrt(n))
   c = ceiling(sqrt(n))
-	tiff(paste("Feature_", text, "_AR_distribution_", method, ".tiff", sep = ""), res = 300, height = r*5, width = c*5, units = 'cm')
+	jpeg(paste("Feature_", text, "_AR_distribution_", method, ".jpg", sep = ""), res = 1200, height = r*5, width = c*5, units = 'cm')
   par(mfrow=c(r,c))
   
   for( i in 1:ncol(permuted)){
@@ -145,7 +147,7 @@ visualizeARHistogram = function(permuted, text, method){
 #' @export
 visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group.levels, unit = "days")
 {
-  cat("Visualizing significant intervals of feature = ", text, "\n")
+  cat("Visualizing Significant Intervals of Feature = ", text, "\n")
   Time = 0 ## This line is just to pass the CRAN checks for the aes in ggplot2
   sub.11 = list()
   sub.10 = list()
@@ -180,12 +182,13 @@ visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group
   axis.text.y = element_text(colour = "black", size = 12, angle = 0, hjust = 0.5, vjust = 0.5, face = "bold"),
   axis.title.x = element_text(colour = "black", size = 15, angle = 0, hjust = 0.5, vjust = 0.5, face = "bold"),
   axis.title.y = element_text(colour = "black", size = 15, angle = 90, hjust = 0.5, vjust = 0.5, face = "bold"), 
-  legend.text = element_text(size = 15, face="plain"), legend.title = element_blank()) +
+  legend.text = element_text(size = 15, face="plain"), legend.title = element_blank(),
+  plot.title = element_text(hjust = 0.5)) +
   theme(legend.position = "top") + scale_x_continuous(breaks = waiver())' 
   p2 = xx  
   p3 = paste(p1, p2, sep="+")
   p = eval(parse(text = p3))
-  ggsave(filename=paste("Feature_", text, "_SignificantInterval_", method, ".tiff", sep=""), dpi = 300, height = 10, width = 15, units = 'cm')
+  ggsave(filename=paste("Feature_", text, "_SignificantInterval_", method, ".jpg", sep=""), dpi = 1200, height = 10, width = 15, units = 'cm')
 }
 
 
@@ -202,7 +205,7 @@ visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group
 #' @references
 #' Ahmed Metwally (ametwa2@uic.edu)
 #' @export
-visualizeTimeIntervals = function(interval.details, prefix = "MetaLonDA_timeline")
+visualizeTimeIntervals = function(interval.details, prefix = "MetaLonDA_timeline", unit = "days")
 {
   feature=0;dominant=0;ID=0;Group=0;lnn=0 ## This line is just to pass the CRAN checks for the aes in ggplot2
   interval.details$dominant = as.factor(interval.details$dominant)
@@ -213,7 +216,7 @@ visualizeTimeIntervals = function(interval.details, prefix = "MetaLonDA_timeline
   ggplot(interval.details, aes(ymin = start , ymax = end, x = feature, xend = feature)) + 
     geom_linerange(aes(color = dominant), size = 1) + 
     coord_flip() +  scale_colour_manual(values=c("firebrick", "blue")) +
-    labs(x = "Feature", y = "Time (Days)", colour="Dominant") + 
+    labs(x = "Feature", y = sprintf("Time (%s)", unit), colour="Dominant") + 
      theme(axis.text.x = element_text(colour = "black", size = 10, angle = 0, hjust = 0.5, vjust = 0.5, face = "bold"),
            axis.text.y = element_text(colour = "black", size = 8, angle = 0, vjust = 0.5, face = "bold"),
            axis.title.x = element_text(colour = "black", size = 15, angle = 0, hjust = 0.5, vjust = 0.5, face = "bold"),
@@ -223,5 +226,5 @@ visualizeTimeIntervals = function(interval.details, prefix = "MetaLonDA_timeline
           panel.grid.major.y = element_line(colour = "white", size = 6),
           panel.grid.major.x = element_line(colour = "white",size = 0.75)) +
     theme(legend.position="top", panel.border = element_rect(colour = "black", fill = NA, size = 2))
-  ggsave(filename = paste(prefix, "_TimeIntervals_", ".tiff", sep=""), dpi = 300, height = 30, width = 20, units = 'cm')
+  ggsave(filename = paste(prefix, "_MetaLonDA_TimeIntervals.jpg", sep=""), dpi = 1200, height = 30, width = 20, units = 'cm')
 }

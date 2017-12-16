@@ -14,23 +14,23 @@
 #' Ahmed Metwally (ametwa2@uic.edu)
 #' @examples 
 #' data(metalonda_test_data)
-#' n.sample = 5 # sample size;
-#' n.timepoints = 10 # time point;
+#' n.sample = 5
+#' n.timepoints = 10
 #' n.perm = 3
-#' n.group= 2 # number of group;
-#' Group = factor(c(rep(0,n.sample*n.timepoints), rep(1,n.sample*n.timepoints)))
+#' n.group = 2
+#' Group = factor(c(rep(0, n.sample*n.timepoints), rep(1, n.sample*n.timepoints)))
 #' Time = rep(rep(1:n.timepoints, times = n.sample), 2)
 #' ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 #' points = seq(1, 10, length.out = 10)
 #' aggregate.df = data.frame(Count = metalonda_test_data[1,], Time = Time, Group = Group, ID = ID)
-#' permutation(aggregate.df, n.perm = 3, method = "nbinomial", points)
+#' prm = permutation(aggregate.df, n.perm = 3, method = "nbinomial", points)
 #' @export
 permutation = function(perm.dat, n.perm = 500, method = "nbinomial", points, lev){
 
   n.subjects = length(unique(perm.dat$ID))
-  cat("# of subjects = ", n.subjects, "\n")
+  cat("# of Subjects = ", n.subjects, "\n")
   
-  ### Start permutation
+  ## Start permutation
   pp = list() 
   perm = 0 # to be able to store the value
   pp = llply(1:n.perm, function(j){

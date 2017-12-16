@@ -11,31 +11,29 @@
 #' @references
 #' Ahmed Metwally (ametwa2@uic.edu)
 #' @examples 
-#' 
-#' 
 #' data(metalonda_test_data)
 #' n.sample = 5 
 #' n.timepoints = 10 
-#' n.group= 2 
+#' n.group = 2 
 #' Group = factor(c(rep(0, n.sample*n.timepoints), rep(1, n.sample*n.timepoints)))
 #' Time = rep(rep(1:n.timepoints, times = n.sample), 2)
 #' ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 #' points = seq(1, 10, length.out = 10)
 #' aggretage.df = data.frame(Count = metalonda_test_data[1,], Time = Time, Group = Group, ID = ID)
-#' curveFitting(df = aggretage.df, method= "nbinomial", points)
+#' cf = curveFitting(df = aggretage.df, method= "nbinomial", points)
 #' @export
 curveFitting = function(df, method = "nbinomial", points){
   
-  # Seprate the two groups
+  ## Seprate the two groups
   group.0 = df[df$Group==0, ]
   group.1 = df[df$Group==1, ]
   group.null = df
 
   ## Fitting 
   if(method == "nbinomial"){
-    # null model
+    ## null model
     mod.null = gssanova(Count ~ Time, data = group.null, family = "nbinomial", skip.iter=TRUE)
-    # full model
+    ## full model
     mod.0 = gssanova(Count ~ Time, data = group.0, family = "nbinomial", skip.iter=TRUE)
     mod.1 = gssanova(Count ~ Time, data = group.1, family = "nbinomial", skip.iter=TRUE)
     mod.0.nbinomial.project = project(mod.0, c("Time"))
@@ -43,16 +41,16 @@ curveFitting = function(df, method = "nbinomial", points){
     mod.null.nbinomial.project = project(mod.null, c("Time"))
   }
   else if(method == "lowess"){
-    # null model
+    ## null model
     mod.null = loess(Count ~ Time, data = group.null)
-    # full model
+    ## full model
     mod.0 = loess(Count ~ Time, data = group.0)
     mod.1 = loess(Count ~ Time, data = group.1)
   }
   
   
   
-  ### Calculate goodness of fit F-statistic for the non nbinomial models
+  ## Calculate goodness of fit F-statistic for the non nbinomial models
   if(method !="nbinomial")
   {
     rss.null = summary(mod.null)$rss
@@ -69,12 +67,12 @@ curveFitting = function(df, method = "nbinomial", points){
   ## prepare dataframe for plotting
   if(method != "nbinomial")
   {
-    ### Curve dataframe
+    ## Curve dataframe
     dd.null = data.frame(Time = points, Count = est.null$fit, Group = "NULL", ID = "NULL")
     dd.0 = data.frame(Time = points, Count = est.0$fit, Group = "fit.0", ID = "fit.0")
     dd.1 = data.frame(Time = points, Count = est.1$fit, Group = "fit.1", ID = "fit.1")
     
-    ### Confidence interval dataframe
+    ## Confidence interval dataframe
     dd.null.u95 = data.frame(Time = points, Count = (est.null$fit + 1.96*est.null$se), Group = "null.u", ID = "null.u")
     dd.null.l95 = data.frame(Time = points, Count = (est.null$fit - 1.96*est.null$se), Group = "null.l", ID = "null.l")
     dd.0.u95 = data.frame(Time = points, Count = (est.0$fit + 1.96*est.0$se), Group = "fit.0.u", ID = "fit.0.u")
@@ -82,12 +80,12 @@ curveFitting = function(df, method = "nbinomial", points){
     dd.1.u95 = data.frame(Time = points, Count = (est.1$fit + 1.96*est.1$se), Group = "fit.1.u", ID = "fit.1.u")
     dd.1.l95 = data.frame(Time = points, Count = (est.1$fit - 1.96*est.1$se), Group = "fit.1.l", ID = "fit.1.l")
   } else{
-    ### Curve dataframe
+    ## Curve dataframe
     dd.null = data.frame(Time = points, Count = mod.null$nu/exp(est.null$fit), Group = "null", ID = "null")
     dd.0 = data.frame(Time = points, Count = mod.0$nu/exp(est.0$fit), Group = "fit.0", ID = "fit.0")
     dd.1 = data.frame(Time = points, Count = mod.1$nu/exp(est.1$fit), Group = "fit.1", ID = "fit.1")
     
-    ### Confidence interval dataframe
+    ## Confidence interval dataframe
     dd.null.u95 = data.frame(Time = points, Count = mod.null$nu/exp(est.null$fit +1.96*est.null$se), Group = "null.u", ID = "null.u")
     dd.null.l95 = data.frame(Time = points, Count = mod.null$nu/exp(est.null$fit -1.96*est.null$se), Group = "null.l", ID = "null.l")
     dd.0.u95 = data.frame(Time = points, Count = mod.0$nu/exp(est.0$fit + 1.96*est.0$se), Group = "fit.0.u", ID = "fit.0.u")
@@ -192,7 +190,7 @@ findSigInterval = function(adjusted.pvalue, threshold = 0.05, sign)
   
   if(length(sig) == 0)
   {
-    cat("No significant inteval found \n")
+    cat("No Significant Inteval Found \n")
   }
   else if(length(sig) == 1)
   {

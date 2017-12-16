@@ -1,28 +1,27 @@
 Package: MetaLonDA
 Type: Package
-Title: Metagenomics Longitudinal Differential Abundant Method
-Version: 1.0.4
-Date: 2017-07-26
-Author: Ahmed Metwally, Patricia Finn, Yang Dai, David Perkins
+Title: Metagenomics Longitudinal Differential Abundance Method
+Version: 1.0.7
+Date: 2017-12-16
+Author: Ahmed Metwally, Yang Dai, Patricia Finn, David Perkins
 Maintainer: Ahmed Metwally <ametwa2@uic.edu>
-Description: Identify the time intervals when the microbial features are
-    differentially abundant between two phenotypic groups using negative binomial
-    smoothing spline ANOVA (Ahmed Metwally, Patricia Finn, Yang Dai, David Perkins, ACM BCB’17).
-License: GPL-2
+Description: Identify time intervals of differentially abundant metagenomics features in longitudinal studies <doi:10.1145/3107411.3107429>.
+License: MIT
 Depends:
-    R(>= 3.1.2)
+    R(>= 3.2.0)
 Imports:
     ggplot2,
     gss,
     plyr,
     caTools,
     parallel,
-    doParallel
+    doParallel,
+    metagenomeSeq,
+    DESeq2,
+    edgeR
 Suggests:
     knitr,
     rmarkdown
-VignetteBuilder: knitr
-URL: https://bitbucket.org/ametwally/metalonda
 Repository: CRAN
 NeedsCompilation: no
 Encoding: UTF-8
