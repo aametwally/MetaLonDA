@@ -42,7 +42,22 @@ Returns a list of the significant features a long with their significant time in
 \description{
 Identify significant features and their significant time interval
 }
+\examples{
+\dontrun{
+data(metalonda_test_data)
+n.sample = 5
+n.timepoints = 10
+n.group = 2
+Group = factor(c(rep(0, n.sample*n.timepoints), rep(1,n.sample*n.timepoints)))
+Time = rep(rep(1:n.timepoints, times = n.sample), 2)
+ID = factor(rep(1:(2*n.sample), each = n.timepoints))
+points = seq(1, 10, length.out = 10)
+output.nbinomial = metalondaAll(Count = metalonda_test_data, Time = Time, Group = Group,
+ID = ID, n.perm = 10, fit.method =  "nbinomial", num.intervals = 100, 
+parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH", time.unit = "hours", norm.method = "none",
+prefix = "Test")
+}
+}
 \references{
 Ahmed Metwally (ametwa2@uic.edu)
 }
-

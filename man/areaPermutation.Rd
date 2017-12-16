@@ -32,4 +32,3 @@ areaPermutation(perm)
 \references{
 Ahmed Metwally (ametwa2@uic.edu)
 }
-

@@ -2,7 +2,7 @@
 % Please edit documentation in R/Metalonda.R
 \name{metalonda}
 \alias{metalonda}
-\title{Metagenomic Longitudinal Differential Abundant Analysis for one feature}
+\title{Metagenomic Longitudinal Differential Abundance Analysis for one feature}
 \usage{
 metalonda(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomial",
   points, text = 0, parall = FALSE, pvalue.threshold = 0.05,
@@ -37,22 +37,21 @@ metalonda(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomial",
 eeturns a list of the significant time intervals for the tested feature.
 }
 \description{
-Find significant time intervals of the feature
+Find significant time intervals of the one feature
 }
 \examples{
 data(metalonda_test_data)
-n.sample = 5 # sample size;
-n.timepoints = 10 # time point;
-n.group= 2 # number of group;
-Group = factor(c(rep(0,n.sample*n.timepoints), rep(1,n.sample*n.timepoints)))
+n.sample = 5
+n.timepoints = 10
+n.group = 2
+Group = factor(c(rep(0, n.sample*n.timepoints), rep(1,n.sample*n.timepoints)))
 Time = rep(rep(1:n.timepoints, times = n.sample), 2)
 ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 points = seq(1, 10, length.out = 10)
-output_1_nbinomial = metalonda(Count = metalonda_test_data[1,], Time = Time, Group = Group,
+output.nbinomial = metalonda(Count = metalonda_test_data[1,], Time = Time, Group = Group,
 ID = ID, fit.method =  "nbinomial", n.perm = 10, points = points,
-text=rownames(metalonda_test_data)[1], parall = FALSE, pvalue.threshold=0.05, adjust.method="BH")
+text = rownames(metalonda_test_data)[1], parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH")
 }
 \references{
 Ahmed Metwally (ametwa2@uic.edu)
 }
-

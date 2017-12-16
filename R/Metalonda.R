@@ -177,6 +177,7 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
 #' @references
 #' Ahmed Metwally (ametwa2@uic.edu)
 #' @examples 
+#' \dontrun{
 #' data(metalonda_test_data)
 #' n.sample = 5
 #' n.timepoints = 10
@@ -189,6 +190,7 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
 #' ID = ID, n.perm = 10, fit.method =  "nbinomial", num.intervals = 100, 
 #' parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH", time.unit = "hours", norm.method = "none",
 #' prefix = "Test")
+#' }
 #' @export
 metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
                          fit.method = "nbinomial", num.intervals = 100, parall = FALSE, 

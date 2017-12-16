@@ -22,7 +22,7 @@ visualizeArea(aggregate.df, model.ss, method, start, end, text, group.levels,
 
 \item{group.levels}{Level's name}
 
-\item{unit}{time unit used in the Time vector (days, weeks, months, etc.)}
+\item{unit}{time unit used in the Time vector (hours, days, weeks, months, etc.)}
 }
 \description{
 Visualize significant time interval
@@ -30,4 +30,3 @@ Visualize significant time interval
 \references{
 Ahmed Metwally (ametwa2@uic.edu)
 }
-

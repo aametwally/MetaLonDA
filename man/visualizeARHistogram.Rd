@@ -19,4 +19,3 @@ Visualize Area Ratio (AR) empirical distribution for each time interval
 \references{
 Ahmed Metwally (ametwa2@uic.edu)
 }
-

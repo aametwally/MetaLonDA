@@ -3,13 +3,12 @@
 \docType{data}
 \name{metalonda_test_data}
 \alias{metalonda_test_data}
-\title{Simulated data for OTU abundance for 2 phenotypes each has 5 subjects at 10-time points}
+\title{Simulated data of OTU abundance for 2 phenotypes each has 5 subjects at 10 time-points}
 \format{A data frame with 2 OTUs patterns}
 \usage{
 metalonda_test_data
 }
 \description{
-The dataset is used for testing the metalonda.
+The dataset is used for testing the MetaLonDA
 }
 \keyword{datasets}
-

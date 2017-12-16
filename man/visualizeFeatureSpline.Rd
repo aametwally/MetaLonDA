@@ -17,7 +17,7 @@ visualizeFeatureSpline(df, model, method, text, group.levels, unit = "days")
 
 \item{group.levels}{The two level's name}
 
-\item{unit}{time unit used in the Time vector (days, weeks, months, etc.)}
+\item{unit}{time unit used in the Time vector (hours, days, weeks, months, etc.)}
 }
 \description{
 Plot the longitudinal features along with the fitted splines
@@ -25,4 +25,3 @@ Plot the longitudinal features along with the fitted splines
 \references{
 Ahmed Metwally (ametwa2@uic.edu)
 }
-

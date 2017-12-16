@@ -55,7 +55,7 @@ visualizeFeature = function (df, text, group.levels, unit = "days")
 #' @param method The fitting method (negative binomial, LOWESS)
 #' @param group.levels The two level's name
 #' @param text feature name
-#' @param unit time unit used in the Time vector (days, weeks, months, etc.)
+#' @param unit time unit used in the Time vector (hours, days, weeks, months, etc.)
 #' @import ggplot2
 #' @import grDevices
 #' @import graphics
@@ -138,7 +138,7 @@ visualizeARHistogram = function(permuted, text, method){
 #' @param end Vector of the end points of the time intervals
 #' @param text Feature name
 #' @param group.levels Level's name
-#' @param unit time unit used in the Time vector (days, weeks, months, etc.)
+#' @param unit time unit used in the Time vector (hours, days, weeks, months, etc.)
 #' @import ggplot2
 #' @import grDevices
 #' @import graphics
@@ -199,6 +199,7 @@ visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group
 #'
 #' @param interval.details Dataframe has infomation about significant interval (feature name, start, end, dominant, p-value)
 #' @param prefix prefix for the output figure
+#' @param unit time unit used in the Time vector (hours, days, weeks, months, etc.)
 #' @import ggplot2
 #' @import grDevices
 #' @import graphics

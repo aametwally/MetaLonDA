@@ -4,12 +4,15 @@
 \alias{visualizeTimeIntervals}
 \title{Visualize all significant time intervals for all tested features}
 \usage{
-visualizeTimeIntervals(interval.details, prefix = "MetaLonDA_timeline")
+visualizeTimeIntervals(interval.details, prefix = "MetaLonDA_timeline",
+  unit = "days")
 }
 \arguments{
 \item{interval.details}{Dataframe has infomation about significant interval (feature name, start, end, dominant, p-value)}
 
 \item{prefix}{prefix for the output figure}
+
+\item{unit}{time unit used in the Time vector (hours, days, weeks, months, etc.)}
 }
 \description{
 Visualize all significant time intervals for all tested features
@@ -17,4 +20,3 @@ Visualize all significant time intervals for all tested features
 \references{
 Ahmed Metwally (ametwa2@uic.edu)
 }
-

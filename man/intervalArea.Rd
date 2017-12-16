@@ -31,4 +31,3 @@ intervalArea(model)
 \references{
 Ahmed Metwally (ametwa2@uic.edu)
 }
-

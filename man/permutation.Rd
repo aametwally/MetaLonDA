@@ -25,18 +25,17 @@ Permutes the group label of the samples in order to construct the AR empirical d
 }
 \examples{
 data(metalonda_test_data)
-n.sample = 5 # sample size;
-n.timepoints = 10 # time point;
+n.sample = 5
+n.timepoints = 10
 n.perm = 3
-n.group= 2 # number of group;
-Group = factor(c(rep(0,n.sample*n.timepoints), rep(1,n.sample*n.timepoints)))
+n.group = 2
+Group = factor(c(rep(0, n.sample*n.timepoints), rep(1, n.sample*n.timepoints)))
 Time = rep(rep(1:n.timepoints, times = n.sample), 2)
 ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 points = seq(1, 10, length.out = 10)
 aggregate.df = data.frame(Count = metalonda_test_data[1,], Time = Time, Group = Group, ID = ID)
-permutation(aggregate.df, n.perm = 3, method = "nbinomial", points)
+prm = permutation(aggregate.df, n.perm = 3, method = "nbinomial", points)
 }
 \references{
 Ahmed Metwally (ametwa2@uic.edu)
 }
-

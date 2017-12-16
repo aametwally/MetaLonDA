@@ -17,4 +17,3 @@ Normalize count matrix
 \references{
 Ahmed Metwally (ametwa2@uic.edu)
 }
-

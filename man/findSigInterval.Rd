@@ -27,4 +27,3 @@ findSigInterval(p, threshold = 0.05, sign)
 \references{
 Ahmed Metwally (ametwa2@uic.edu)
 }
-
