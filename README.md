@@ -16,29 +16,33 @@ This section details steps for installing and running MetaLonDA. If you experien
 #### Installation:
 ```
 install.packages("MetaLonDA")
-library(MetaLonDA)
-data(metalonda_test_data)
 ```
 
 
 #### Example:
 ```
-n.sample = 5 # sample size;
-n.timepoints = 10 # time point;
-n.group= 2 # number of group;
-Group = factor(c(rep(0,n.sample*n.timepoints), rep(1,n.sample*n.timepoints)))
+library(MetaLonDA)
+data(metalonda_test_data)
+
+n.sample = 5
+n.timepoints = 10
+n.group = 2
+Group = factor(c(rep(0, n.sample*n.timepoints), rep(1,n.sample*n.timepoints)))
 Time = rep(rep(1:n.timepoints, times = n.sample), 2)
 ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 points = seq(1, 10, length.out = 10)
 
+## Test the first feature 
+output.nbinomial = metalonda(Count = metalonda_test_data[1,], Time = Time, Group = Group,
+  ID = ID, fit.method =  "nbinomial", n.perm = 10, points = points,
+  text = rownames(metalonda_test_data)[1], parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH")
 
-output_all_nbinomial = metalondaAll(data = metalonda_test_data, Time = Time, Group = Group, ID = ID, 
-                                     log = FALSE, fit.method = "nbinomial", n.perm = 10, points = points, pvalue_threshold=0.05)
-
-output_1_nbinomial = metalonda(Count = metalonda_test_data[1,], Time = Time, Group = Group, ID = ID, log = log,
-           fit.method =  "nbinomial", n.perm = 10, points = points,
-           text=rownames(metalonda_test_data)[1], parall = FALSE, pvalue_threshold=0.05, adjust.method="BH")
-
+## Test all features
+output.nbinomial = metalondaAll(Count = metalonda_test_data, Time = Time, Group = Group,
+  ID = ID, n.perm = 9, fit.method =  "nbinomial", num.intervals = 100, 
+  parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH", time.unit = "hours", norm.method = "none",
+  prefix = "Test")
+  
 ```
 
 
