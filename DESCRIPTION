@@ -6,7 +6,7 @@ Author: Ahmed Metwally, Yang Dai, Patricia Finn, David Perkins
 Maintainer: Ahmed Metwally <ametwa2@uic.edu>
 Version: 1.0.7
 Date: 2017-12-16
-License: MIT
+License: MIT + file LICENSE
 Depends:
     R(>= 3.2.0)
 Imports:
