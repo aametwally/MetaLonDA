@@ -13,8 +13,8 @@
 #' @param parall boolean to indicate whether to use multicore.
 #' @param pvalue.threshold p-value threshold cutoff for identifing significant time intervals.
 #' @param adjust.method multiple testing correction method.
-#' @param time.unit time unit used in the Time vector (days, weeks, months, etc.)
-#' @return eeturns a list of the significant time intervals for the tested feature.
+#' @param time.unit time unit used in the Time vector (hours, days, weeks, months, etc.)
+#' @return returns a list of the significant time intervals for the tested feature.
 #' @import parallel
 #' @import doParallel
 #' @import stats
@@ -29,9 +29,12 @@
 #' Time = rep(rep(1:n.timepoints, times = n.sample), 2)
 #' ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 #' points = seq(1, 10, length.out = 10)
+#' \dontrun{
 #' output.nbinomial = metalonda(Count = metalonda_test_data[1,], Time = Time, Group = Group,
 #' ID = ID, fit.method =  "nbinomial", n.perm = 10, points = points,
-#' text = rownames(metalonda_test_data)[1], parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH")
+#' text = rownames(metalonda_test_data)[1], parall = FALSE, pvalue.threshold = 0.05,
+#' adjust.method = "BH")
+#' }
 #' @export
 metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomial", 
                       points, text = 0, parall = FALSE, pvalue.threshold = 0.05, 
@@ -170,7 +173,7 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
 #' @param parall logic to indicate whether to use multicore
 #' @param pvalue.threshold p-value threshold cutoff
 #' @param adjust.method Multiple testing correction methods
-#' @param time.unit time unit used in the Time vector (days, weeks, months, etc.)
+#' @param time.unit time unit used in the Time vector (hours, days, weeks, months, etc.)
 #' @param norm.method normalization method to be used to normalize count matrix (CSS, median-ratio, etc.) 
 #' @param prefix prefix for the output figure
 #' @return Returns a list of the significant features a long with their significant time intervals
@@ -188,8 +191,8 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
 #' points = seq(1, 10, length.out = 10)
 #' output.nbinomial = metalondaAll(Count = metalonda_test_data, Time = Time, Group = Group,
 #' ID = ID, n.perm = 10, fit.method =  "nbinomial", num.intervals = 100, 
-#' parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH", time.unit = "hours", norm.method = "none",
-#' prefix = "Test")
+#' parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH", 
+#' time.unit = "hours", norm.method = "none", prefix = "Test")
 #' }
 #' @export
 metalondaAll = function(Count, Time, Group, ID, n.perm = 500,

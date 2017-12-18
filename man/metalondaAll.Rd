@@ -30,7 +30,7 @@ metalondaAll(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomial",
 
 \item{adjust.method}{Multiple testing correction methods}
 
-\item{time.unit}{time unit used in the Time vector (days, weeks, months, etc.)}
+\item{time.unit}{time unit used in the Time vector (hours, days, weeks, months, etc.)}
 
 \item{norm.method}{normalization method to be used to normalize count matrix (CSS, median-ratio, etc.)}
 
@@ -54,8 +54,8 @@ ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 points = seq(1, 10, length.out = 10)
 output.nbinomial = metalondaAll(Count = metalonda_test_data, Time = Time, Group = Group,
 ID = ID, n.perm = 10, fit.method =  "nbinomial", num.intervals = 100, 
-parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH", time.unit = "hours", norm.method = "none",
-prefix = "Test")
+parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH", 
+time.unit = "hours", norm.method = "none", prefix = "Test")
 }
 }
 \references{

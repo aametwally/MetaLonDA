@@ -31,10 +31,10 @@ metalonda(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomial",
 
 \item{adjust.method}{multiple testing correction method.}
 
-\item{time.unit}{time unit used in the Time vector (days, weeks, months, etc.)}
+\item{time.unit}{time unit used in the Time vector (hours, days, weeks, months, etc.)}
 }
 \value{
-eeturns a list of the significant time intervals for the tested feature.
+returns a list of the significant time intervals for the tested feature.
 }
 \description{
 Find significant time intervals of the one feature
@@ -48,9 +48,12 @@ Group = factor(c(rep(0, n.sample*n.timepoints), rep(1,n.sample*n.timepoints)))
 Time = rep(rep(1:n.timepoints, times = n.sample), 2)
 ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 points = seq(1, 10, length.out = 10)
+\dontrun{
 output.nbinomial = metalonda(Count = metalonda_test_data[1,], Time = Time, Group = Group,
 ID = ID, fit.method =  "nbinomial", n.perm = 10, points = points,
-text = rownames(metalonda_test_data)[1], parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH")
+text = rownames(metalonda_test_data)[1], parall = FALSE, pvalue.threshold = 0.05,
+adjust.method = "BH")
+}
 }
 \references{
 Ahmed Metwally (ametwa2@uic.edu)
