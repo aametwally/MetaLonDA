@@ -1,13 +1,12 @@
 Package: MetaLonDA
 Type: Package
 Title: Metagenomics Longitudinal Differential Abundance Method
-Description: Identify time intervals of differentially abundant metagenomics features in longitudinal studies <doi:10.1145/3107411.3107429>.
-Author: Ahmed Metwally, Yang Dai, Patricia Finn, David Perkins
-Maintainer: Ahmed Metwally <ametwa2@uic.edu>
 Version: 1.0.7
 Date: 2017-12-16
+Author: Ahmed Metwally, Yang Dai, Patricia Finn, David Perkins
+Maintainer: Ahmed Metwally <ametwa2@uic.edu>
+Description: Identify time intervals of differentially abundant metagenomics features in longitudinal studies <doi:10.1145/3107411.3107429>.
 License: MIT + file LICENSE
-biocViews:
 Depends:
     R(>= 3.2.0)
 Imports:
@@ -23,6 +22,7 @@ Imports:
 Suggests:
     knitr,
     rmarkdown
+biocViews:
 Repository: CRAN
 NeedsCompilation: no
 Encoding: UTF-8
