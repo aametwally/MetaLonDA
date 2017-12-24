@@ -1,0 +1,7 @@
+bibentry(
+ bibtype="Article",
+ title="Detection of Differential Abundance Intervals in Longitudinal Metagenomic Data Using Negative Binomial Smoothing Spline ANOVA",
+ journal=“ACM BCB“,
+ year="2017",
+ author=“Ahmed A. Metwally, Patricia W. Finn, Yang Dai, David Perkins",
+ textVersion="Metwally, Ahmed A., et al. "Detection of Differential Abundance Intervals in Longitudinal Metagenomic Data Using Negative Binomial Smoothing Spline ANOVA." Proceedings of the 8th ACM International Conference on Bioinformatics, Computational Biology, and Health Informatics. ACM, 2017. doi: 10.1145/3107411.3107429" )
