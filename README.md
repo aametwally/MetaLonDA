@@ -7,6 +7,12 @@ MetaLonDA (METAgenomic LONgitudinal Differential Abundance method) is a method t
 
 
 
+## Publication:
+* Ahmed A. Metwally, Patricia W. Finn, Yang Dai, and David L. Perkins. "Detection of Differential Abundance Intervals in Longitudinal Metagenomic Data Using Negative Binomial Smoothing Spline ANOVA." ACM BCB (2017) 
+
+
+
+
 # Getting Started
 This section details steps for installing and running MetaLonDA. If you experience difficulty installing or running the software, please contact (Ahmed Metwally: ametwa2@uic.edu).
 
