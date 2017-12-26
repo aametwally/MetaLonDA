@@ -21,7 +21,7 @@ This section details steps for installing and running MetaLonDA. If you experien
 * R(>= 3.2.0)
 
 
-## Installing, Testing, and Running
+## Installing and Running
 
 #### Installation:
 ```
