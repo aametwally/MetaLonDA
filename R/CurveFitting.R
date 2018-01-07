@@ -190,7 +190,7 @@ findSigInterval = function(adjusted.pvalue, threshold = 0.05, sign)
   
   if(length(sig) == 0)
   {
-    cat("No Significant Inteval Found \n")
+    cat("No Significant Intevals Found \n")
   }
   else if(length(sig) == 1)
   {

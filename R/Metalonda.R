@@ -52,6 +52,11 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
   Group[which(Group == gr.1)] = 0
   Group[which(Group == gr.2)] = 1
   
+  ## Preprocessing: add pseudo counts for zero abudnance features
+  Count = Count + 1e-8
+  # cat("Count = ")
+  # print(Count)
+  # cat("\n")
   
   ## Form MetaLonDA dataframe
   aggregate.df = data.frame(Count = Count, Time = Time, Group = Group, ID = ID)
@@ -245,7 +250,7 @@ metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
     #points = floor(seq(min(Time), max(Time), length.out = num.intervals + 1))
     points = seq(min(Time), max(Time), length.out = num.intervals + 1)
   
-  cat("Points = ")
+  cat("Prediction Points = ")
   print(points)
   cat("\n")
   
@@ -257,19 +262,24 @@ metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
   gr.1 = group.levels[1]
   gr.2 = group.levels[2]
   
-  q = Count[,which(ID %in% ID[which(Group == gr.1)])]
-  w = Count[,which(ID %in% ID[which(Group == gr.2)])]
-  rm = which(apply(q, 1, sum) == 0 | apply(w, 1, sum) == 0)
   
-  if(length(rm) == 0)
-  {
-    data.count.filt = Count
-  } else
-  {
-    data.count.filt = Count[-rm, ]
-  }
   
-  data.count.filt = as.matrix(data.count.filt)
+  # ## Preprocessing: Remove features that have zeros in all time points of one group 
+  # q = Count[,which(ID %in% ID[which(Group == gr.1)])]
+  # w = Count[,which(ID %in% ID[which(Group == gr.2)])]
+  # rm = which(apply(q, 1, sum) == 0 | apply(w, 1, sum) == 0)
+  # 
+  # if(length(rm) == 0)
+  # {
+  #   data.count.filt = Count
+  # } else
+  # {
+  #   data.count.filt = Count[-rm, ]
+  # }
+  # 
+  # data.count.filt = as.matrix(data.count.filt)
+  
+  data.count.filt = as.matrix(Count)
   
   
   

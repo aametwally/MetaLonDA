@@ -34,7 +34,7 @@ permutation = function(perm.dat, n.perm = 500, method = "nbinomial", points, lev
   pp = list() 
   perm = 0 # to be able to store the value
   pp = llply(1:n.perm, function(j){
-    cat("Permutation = ", j,  "\n")
+    cat("Permutation #", j,  "\n")
     for( i in levels(perm.dat$ID)){
       perm.uniq.len = 1
       m=0
