@@ -57,10 +57,11 @@ ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 ## Define the prediction timeponits 
 points = seq(1, 10, length.out = 100)
 
-## Identify significant time intervals of the first feature: 
-output.metalonda.f1 = metalonda(Count = metalonda_test_data[1,], Time = Time, Group = Group,
-  ID = ID, fit.method = "nbinomial", n.perm = 20, points = points,
-  text = rownames(metalonda_test_data)[1], parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH")
+## Identify significant time intervals of the 5th feature: 
+output.metalonda.f5 = metalonda(Count = metalonda_test_data[5,], Time = Time, Group = Group,
+                                ID = ID, fit.method = "nbinomial", n.perm = 20, points = points,
+                                text = rownames(metalonda_test_data)[5], parall = FALSE, pvalue.threshold = 0.05,     
+                                adjust.method = "BH")
 
 ## Identify significant time intervals for all features: 
 output.metalonda.all = metalondaAll(Count = metalonda_test_data, Time = Time, Group = Group,
