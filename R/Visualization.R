@@ -64,7 +64,7 @@ visualizeFeature = function (df, text, group.levels, unit = "days")
 #' @export
 visualizeFeatureSpline = function (df, model, method, text, group.levels, unit = "days")
 { 
-  cat("Visualizing the Splines of Feature = ", text, "\n")
+  cat("Visualizing Splines of Feature = ", text, "\n")
     
   Count=0;Time=0;ID=0;Group=0;lnn=0 ## This line is just to pass the CRAN checks for the aes in ggplot2
   dd.null = model$dd.null
