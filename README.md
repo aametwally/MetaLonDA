@@ -48,7 +48,9 @@ data(metalonda_test_data)
 View(metalonda_test_data[,1:20])
 ```
 
-![Screenshot](docs/TestData.png)
+
+<img src="docs/TestData.png" width="48">
+<!-- ![Screenshot](docs/TestData.png) --!>
 
 
 ```
