@@ -22,26 +22,34 @@ This section details steps for installing and running MetaLonDA. If you experien
 * R(>= 3.2.0)
 
 
-## Installing and Running
+## Installation Installing and Running
 
-#### Installation:
+#### Installing From CRAN:
+MetaLonDA is deposited on CRAN repository: https://cran.r-project.org/web/packages/MetaLonDA/index.html
 ```
 install.packages("MetaLonDA")
 ```
 
 
-#### Example:
+#### Installing from GitHub:
+```
+library(devtools)
+install_github("aametwally/MetaLonDA")
+```
+
+
+
+## Example:
 ```
 library(MetaLonDA)
-
 
 ## Load read counts of 9 features from 100 samples. Samples are from 2 groups, 5 subjects per group, and 10 time points per subject.
 data(metalonda_test_data)
 
 ## Create Group, Time, and ID annotation vectors
+n.group = 2
 n.sample = 5
 n.timepoints = 10
-n.group = 2
 Group = factor(c(rep(0, n.sample*n.timepoints), rep(1,n.sample*n.timepoints)))
 Time = rep(rep(1:n.timepoints, times = n.sample), 2)
 ID = factor(rep(1:(2*n.sample), each = n.timepoints))
