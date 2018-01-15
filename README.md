@@ -43,7 +43,7 @@ install_github("aametwally/MetaLonDA")
 ```
 library(MetaLonDA)
 
-## Load read counts of 9 features from 100 samples. Samples are from 2 groups, 5 subjects per group, and 10 time points per subject.
+## Load read counts of 8 features from 100 samples. Samples are from 2 groups, 5 subjects per group, and 10 time points per subject.
 data(metalonda_test_data)
 
 ## Create Group, Time, and ID annotation vectors
