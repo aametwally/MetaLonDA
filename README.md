@@ -46,6 +46,9 @@ library(MetaLonDA)
 ## Load read counts of 8 features from 100 samples. Samples are from 2 groups, 5 subjects per group, and 10 time points per subject.
 data(metalonda_test_data)
 
+
+![Screenshot](docs/TestData.png)
+
 ## Create Group, Time, and ID annotation vectors
 n.group = 2
 n.sample = 5
