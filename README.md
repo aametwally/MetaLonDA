@@ -45,8 +45,11 @@ library(MetaLonDA)
 
 ## Load read counts of 8 features from 100 samples. Samples are from 2 groups, 5 subjects per group, and 10 time points per subject.
 data(metalonda_test_data)
+View(metalonda_test_data[,1:20])
 ```
+
 ![Screenshot](docs/TestData.png)
+
 
 ```
 ## Create Group, Time, and ID annotation vectors
@@ -65,7 +68,15 @@ output.metalonda.f5 = metalonda(Count = metalonda_test_data[5,], Time = Time, Gr
                                 ID = ID, fit.method = "nbinomial", n.perm = 20, points = points,
                                 text = rownames(metalonda_test_data)[5], parall = FALSE, pvalue.threshold = 0.05,     
                                 adjust.method = "BH")
+```
 
+![Screenshot](docs/Feature_OTU_5.jpg)
+![Screenshot](docs/Feature_OTU_5_CurveFitting_nbinomial.jpg)
+![Screenshot](docs/Feature_OTU_5_SignificantInterval_nbinomial.jpg)
+
+
+
+```
 ## Identify significant time intervals for all features: 
 output.metalonda.all = metalondaAll(Count = metalonda_test_data, Time = Time, Group = Group,
   ID = ID, n.perm = 20, fit.method = "nbinomial", num.intervals = 100, 
@@ -73,6 +84,12 @@ output.metalonda.all = metalondaAll(Count = metalonda_test_data, Time = Time, Gr
   prefix = "Test")
   
 ```
+
+
+![Screenshot](docs/Test_MetaLonDA_TimeIntervals.jpg)
+![Screenshot](docs/Test_MetaLonDA_TimeIntervals_summary.png)
+
+
 
 
 ### Bugs and Suggestions
