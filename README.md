@@ -52,8 +52,7 @@ View(metalonda_test_data[,1:20])
 <img src="docs/TestData.png">
 <!-- ![Screenshot](docs/TestData.png) --!>
 
-{nbsp} +
-{nbsp} +
+<br><br>
 
 ```
 ## Create Group, Time, and ID annotation vectors
