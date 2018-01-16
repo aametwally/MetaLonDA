@@ -78,8 +78,7 @@ output.metalonda.f5 = metalonda(Count = metalonda_test_data[5,], Time = Time, Gr
 
 
 <br><br>
-<img src="docs/Feature_OTU_5_CurveFitting_nbinomial.jpgg">
-
+<img src="docs/Feature_OTU_5_CurveFitting_nbinomial.jpg">
 
 <br><br>
 <img src="docs/Feature_OTU_5_SignificantInterval_nbinomial.jpg">
