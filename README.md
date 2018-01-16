@@ -72,17 +72,20 @@ output.metalonda.f5 = metalonda(Count = metalonda_test_data[5,], Time = Time, Gr
                                 text = rownames(metalonda_test_data)[5], parall = FALSE, pvalue.threshold = 0.05,     
                                 adjust.method = "BH")
 ```
-<br>
-![Screenshot](docs/Feature_OTU_5.jpg)
 
-<br><br>
-![Screenshot](docs/Feature_OTU_5_CurveFitting_nbinomial.jpg)
-
-<br><br>
-![Screenshot](docs/Feature_OTU_5_SignificantInterval_nbinomial.jpg)
+<br> 
+<img src="docs/Feature_OTU_5.jpg">
 
 
 <br><br>
+<img src="docs/Feature_OTU_5_CurveFitting_nbinomial.jpgg">
+
+
+<br><br>
+<img src="docs/Feature_OTU_5_SignificantInterval_nbinomial.jpg">
+
+<br><br>
+
 ```
 ## Identify significant time intervals for all features: 
 output.metalonda.all = metalondaAll(Count = metalonda_test_data, Time = Time, Group = Group,
@@ -93,11 +96,11 @@ output.metalonda.all = metalondaAll(Count = metalonda_test_data, Time = Time, Gr
 ```
 
 <br>
-![Screenshot](docs/Test_MetaLonDA_TimeIntervals.jpg)
+<img src="docs/Test_MetaLonDA_TimeIntervals.jpg">
+
 
 <br><br>
-![Screenshot](docs/Test_MetaLonDA_TimeIntervals_summary.png)
-
+<img src="docs/Test_MetaLonDA_TimeIntervals_summary.png">
 
 
 <br>
