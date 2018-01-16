@@ -85,7 +85,7 @@ In our example, we used 20 permutations just to showcase how MetaLonDA works. In
 <br> 
 
 1. Figure shows the trajectory of the feature's count across different time points:
-<img src="docs/Feature_OTU_5.jpg">
+<img src="docs/Feature_OTU_5.jpg" width="48px">
 
 
 <br><br>
