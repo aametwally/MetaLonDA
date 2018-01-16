@@ -14,6 +14,7 @@ MetaLonDA (METAgenomic LONgitudinal Differential Abundance method) is a method t
 
 
 <br>
+
 # Getting Started
 This section details steps for installing and running MetaLonDA. If you experience difficulty installing or running the software, please contact (Ahmed Metwally: ametwa2@uic.edu).
 
@@ -39,6 +40,7 @@ install_github("aametwally/MetaLonDA")
 
 
 <br>
+
 ## Example:
 ```
 library(MetaLonDA)
