@@ -55,7 +55,7 @@ View(metalonda_test_data[,1:20])
 <img src="docs/TestData.png">
 <!-- ![Screenshot](docs/TestData.png) --!>
 
-<br><br>
+<br>
 
 ```
 ## Create Group, Time, and ID annotation vectors
@@ -70,7 +70,7 @@ ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 points = seq(1, 10, length.out = 100)
 ```
 
-#### Test one feature 
+### Test one feature 
 ```
 ## Identify significant time intervals of the 5th feature: 
 output.metalonda.f5 = metalonda(Count = metalonda_test_data[5,], Time = Time, Group = Group,
@@ -99,7 +99,7 @@ In our example, we used 20 permutations just to showcase how MetaLonDA works. In
 
 <br><br>
 
-#### Test all features 
+### Test all features 
 ```
 ## Identify significant time intervals for all features: 
 output.metalonda.all = metalondaAll(Count = metalonda_test_data, Time = Time, Group = Group,
@@ -123,5 +123,6 @@ After running the above snippet for testing all features in the count matrix, al
 
 
 <br>
+
 ### Bugs and Suggestions
 MetaLonDA is under active research development. Please report any bugs/suggestions to Ahmed Metwally (ametwa2@uic.edu).
