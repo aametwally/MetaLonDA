@@ -60,7 +60,7 @@ View(metalonda_test_data[,1:20])
 ```
 ## Create Group, Time, and ID annotation vectors
 n.group = 2
-n.sample = 5
+n.sample = 5 
 n.timepoints = 10
 Group = factor(c(rep(0, n.sample*n.timepoints), rep(1,n.sample*n.timepoints)))
 Time = rep(rep(1:n.timepoints, times = n.sample), 2)
@@ -86,6 +86,10 @@ In our example, we used 20 permutations just to showcase how MetaLonDA works. In
 
 1. Figure shows the trajectory of the feature's count across different time points:
 <img src="docs/Feature_OTU_5.jpg" width="48px">
+
+<p align="center">
+  <img src="docs/Feature_OTU_5.jpg" width="150" title="Github Logo">
+</p>
 
 
 <br><br>
