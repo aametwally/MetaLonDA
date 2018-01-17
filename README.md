@@ -62,7 +62,7 @@ View(metalonda_test_data[,1:20])
 n.group = 2
 n.sample = 5 
 n.timepoints = 10
-Group = factor(c(rep(0, n.sample*n.timepoints), rep(1,n.sample*n.timepoints)))
+Group = factor(c(rep("A", n.sample*n.timepoints), rep("B",n.sample*n.timepoints)))
 Time = rep(rep(1:n.timepoints, times = n.sample), 2)
 ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 
