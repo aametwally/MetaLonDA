@@ -43,24 +43,33 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
   cat("Start MetaLonDA \n")
 
   # Extract groups
+  Group = as.character(Group)
   group.levels = sort(unique(Group))
+
+  
+  
   if(length(group.levels) > 2){
     stop("You have more than two phenotypes.")
+  } else if(length(group.levels) < 2){
+    stop("You have less than two phenotypes.")
   }
-  gr.1 = group.levels[1]
-  gr.2 = group.levels[2]
+
+  
+  gr.1 = as.character(group.levels[1])
+  gr.2 = as.character(group.levels[2])
+
   Group[which(Group == gr.1)] = 0
   Group[which(Group == gr.2)] = 1
+
+  
   
   ## Preprocessing: add pseudo counts for zero abudnance features
   Count = Count + 1e-8
-  # cat("Count = ")
-  # print(Count)
-  # cat("\n")
+
   
   ## Form MetaLonDA dataframe
   aggregate.df = data.frame(Count = Count, Time = Time, Group = Group, ID = ID)
-  
+
 
   ## Visualize feature's abundance accross different time points  
   visualizeFeature(aggregate.df, text, group.levels, unit = time.unit)
