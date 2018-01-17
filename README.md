@@ -42,6 +42,8 @@ install_github("aametwally/MetaLonDA")
 
 <br>
 
+
+
 ## Example:
 ```
 library(MetaLonDA)
@@ -54,9 +56,6 @@ View(metalonda_test_data[,1:20])
 
 <img src="docs/TestData.png">
 
-
-<!-- ![Screenshot](docs/TestData.png) --!>
-<!-- ![TestData](docs/TestData.png) --!>
 
 ```
 ## Create Group, Time, and ID annotation vectors
@@ -72,6 +71,7 @@ points = seq(1, 10, length.out = 100)
 ```
 
 ### Test one feature 
+
 ```
 ## Identify significant time intervals of the 5th feature: 
 output.metalonda.f5 = metalonda(Count = metalonda_test_data[5,], Time = Time, Group = Group,
