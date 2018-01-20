@@ -264,6 +264,7 @@ metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
   cat("\n")
   
   ## Filter out the taxa that always have zero of one/both group
+  Group = as.character(Group)
   group.levels = sort(unique(Group))
   if(length(group.levels) > 2){
     stop("You have more than two phenotypes.")
