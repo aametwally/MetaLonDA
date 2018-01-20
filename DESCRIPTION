@@ -1,7 +1,7 @@
 Package: MetaLonDA
 Type: Package
 Title: Metagenomics Longitudinal Differential Abundance Method
-Version: 1.0.84
+Version: 1.0.9
 Date: 2018-1-15
 Author: Ahmed Metwally, Yang Dai, Patricia Finn, David Perkins
 Maintainer: Ahmed Metwally <ametwa2@uic.edu>
