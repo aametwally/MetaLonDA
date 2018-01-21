@@ -79,7 +79,7 @@ output.metalonda.all = metalondaAll(Count = metalonda_test_data, Time = Time, Gr
 sessionInfo()
 ```
 
-##References
+## References
 
 Ahmed A. Metwally, Jie Yang, Christian Ascoli, Yang Dai, Patricia W. Finn, and David L. Perkins. "MetaLonDA: a flexible R package for identifying time intervals of differentially abundant features in metagenomic longitudinal studies", *Microbiome*, 2018.
 
