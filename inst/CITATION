@@ -1,7 +1,9 @@
-bibentry(
- bibtype="Article",
- title="Detection of Differential Abundance Intervals in Longitudinal Metagenomic Data Using Negative Binomial Smoothing Spline ANOVA",
- journal=“ACM BCB“,
- year="2017",
- author=“Ahmed A. Metwally, Patricia W. Finn, Yang Dai, David Perkins",
- textVersion="Metwally, Ahmed A., et al. "Detection of Differential Abundance Intervals in Longitudinal Metagenomic Data Using Negative Binomial Smoothing Spline ANOVA." Proceedings of the 8th ACM International Conference on Bioinformatics, Computational Biology, and Health Informatics. ACM, 2017. doi: 10.1145/3107411.3107429" )
+citHeader("To cite MetaLonDA in publications, please use:")
+citEntry(entry = "Article",
+  author = "Ahmed A. Metwally, Jie Yang, Christian Ascoli, Yang Dai, Patricia W. Finn, David L. Perkins",
+  title = "MetaLonDA: a flexible R package for identifying time intervals of differentially abundant features in metagenomic longitudinal studies",
+  journal = "Microbiome",
+  year = "2018",
+  textVersion = "Ahmed A. Metwally, Jie Yang, Christian Ascoli, Yang Dai, Patricia W. Finn, David L. Perkins. "MetaLonDA: a flexible R package for identifying time intervals of differentially abundant features in metagenomic longitudinal studies." Microbiome (2018)."
+)
+
