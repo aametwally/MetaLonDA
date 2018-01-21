@@ -4,6 +4,5 @@ citEntry(entry = "Article",
   title = "MetaLonDA: a flexible R package for identifying time intervals of differentially abundant features in metagenomic longitudinal studies",
   journal = "Microbiome",
   year = "2018",
-  textVersion = "Ahmed A. Metwally, Jie Yang, Christian Ascoli, Yang Dai, Patricia W. Finn, David L. Perkins. "MetaLonDA: a flexible R package for identifying time intervals of differentially abundant features in metagenomic longitudinal studies." Microbiome (2018)."
+  textVersion = "Ahmed A. Metwally, Jie Yang, Christian Ascoli, Yang Dai, Patricia W. Finn, David L. Perkins. MetaLonDA: a flexible R package for identifying time intervals of differentially abundant features in metagenomic longitudinal studies. Microbiome (2018)."
 )
-
