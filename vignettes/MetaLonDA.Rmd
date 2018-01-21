@@ -44,7 +44,7 @@ points = seq(1, 10, length.out = 100)
 
 
 
-### Test One Feature
+### Test one feature
 ```{r}
 ## Create Group, Time, and ID annotation vectors
 n.group = 2
