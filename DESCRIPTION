@@ -5,15 +5,15 @@ Version: 1.0.9
 Date: 2018-1-15
 Author: Ahmed Metwally, Yang Dai, Patricia Finn, David Perkins
 Maintainer: Ahmed Metwally <ametwa2@uic.edu>
-Description: Identify time intervals of differentially abundant metagenomics features in longitudinal studies <doi:10.1145/3107411.3107429>.
+Description: Identify time intervals of differentially abundant metagenomics features in longitudinal studies.
 License: MIT + file LICENSE
 Depends:
     R(>= 3.2.0)
-Imports:
-    ggplot2,
+Imports:  
     gss,
     plyr,
     caTools,
+    ggplot2,
     parallel,
     doParallel,
     metagenomeSeq,
