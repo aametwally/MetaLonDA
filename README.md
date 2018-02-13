@@ -8,7 +8,7 @@ MetaLonDA (METAgenomic LONgitudinal Differential Abundance method) is a method t
 
 
 ## Publications:
-* Ahmed A. Metwally, Jie Yang, Christian Ascoli, Yang Dai, Patricia W. Finn, and David L. Perkins. "MetaLonDA: a flexible R package for identifying time intervals of differentially abundant features in metagenomic longitudinal studies", Microbiome, In Press, 2018.
+* Ahmed A. Metwally, Jie Yang, Christian Ascoli, Yang Dai, Patricia W. Finn, and David L. Perkins. "MetaLonDA: a flexible R package for identifying time intervals of differentially abundant features in metagenomic longitudinal studies", Microbiome, 2018.  [[paper](https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-018-0402-y)]
 * Ahmed A. Metwally, Patricia W. Finn, Yang Dai, and David L. Perkins. "Detection of Differential Abundance Intervals in Longitudinal Metagenomic Data Using Negative Binomial Smoothing Spline ANOVA." ACM BCB, 2017. [[paper](https://dl.acm.org/citation.cfm?id=3107429)]
 
 
