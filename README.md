@@ -119,7 +119,9 @@ After running the above snippet for testing all features in the count matrix, al
 
 <br>
 1. Figure illustrates time intervals of differentially abundant features between the two groups. Each line represents a range of the significant time interval of the corresponding feature. 
-<img src="docs/Test_MetaLonDA_TimeIntervals.jpg">
+
+![screenshot of outputs](docs/Test_MetaLonDA_TimeIntervals.jpg)
+
 
 
 <br><br>
