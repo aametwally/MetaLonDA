@@ -106,7 +106,7 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
         })
   } else {
     cat("You have entered unsupported fitting method\n")
-    exit()
+    quit()
     
   }
   
