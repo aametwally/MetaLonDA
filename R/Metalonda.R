@@ -86,11 +86,12 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
 
   
   cat("Start Curve Fitting \n") 
-  if (fit.method == "ss")
-  {
-    cat("Fitting: Gaussian SS \n") 
-    model= curveFitting(df = aggregate.df, method= "ss", points)
-  }  else if (fit.method == "lowess")
+  #if (fit.method == "ss")
+  #{
+  #  cat("Fitting: Gaussian SS \n") 
+  #  model= curveFitting(df = aggregate.df, method= "ss", points)
+  #}  else if (fit.method == "lowess")
+  if (fit.method == "lowess")
   {
     cat("Fitting: LOWESS \n")
     model = curveFitting(df = aggregate.df, method= "lowess", points)
@@ -103,6 +104,10 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
         print(paste("ERROR in gss = ", err, sep="")); 
         return("ERROR")
         })
+  } else {
+    cat("You have entered unsupported fitting method\n")
+    quit()
+    
   }
   
   ## Visualize feature's trajectories spline
