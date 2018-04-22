@@ -30,14 +30,15 @@ This section details steps for installing and running MetaLonDA. If you experien
 
 ## Installation
 
-#### Installing MetaLonDA from CRAN:
-MetaLonDA is deposited on CRAN repository: https://cran.r-project.org/web/packages/MetaLonDA/index.html
+#### Install MetaLonDA from CRAN:
+Install the latest released version from CRAN: https://cran.r-project.org/web/packages/MetaLonDA/index.html
 ```
 install.packages("MetaLonDA")
 ```
 
 
-#### Installing MetaLonDA from GitHub:
+#### Install MetaLonDA from GitHub:
+Download the latest development code of MetaLonDA from GitHub using devtools
 ```
 library(devtools)
 install_github("aametwally/MetaLonDA")
