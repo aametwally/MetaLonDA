@@ -129,7 +129,7 @@ After running the above snippet for testing all features in the count matrix, al
 
 
 <br><br>
-2. Descriptive summary all siginifcant time intervals of differentially abundant features
+2. Descriptive summary all signifcant time intervals of differentially abundant features
 <img src="docs/Test_MetaLonDA_TimeIntervals_summary.png">
 
 
