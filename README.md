@@ -2,9 +2,10 @@
 
 [![Build Status](https://travis-ci.org/aametwally/MetaLonDA.svg?branch=master)](https://travis-ci.org/aametwally/MetaLonDA)
 [![Rdoc](http://www.rdocumentation.org/badges/version/MetaLonDA)](http://www.rdocumentation.org/packages/MetaLonDA)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/MetaLonDA)](https://cran.r-project.org/package=MetaLonDA)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/MetaLonDA)](https://cranlogs.r-pkg.org/badges/grand-total/MetaLonDA)
 [![License](https://img.shields.io/badge/license-MIT-red.svg)](https://en.wikipedia.org/wiki/MIT_License)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/MetaLonDA)](https://cran.r-project.org/package=MetaLonDA)
+
 
 
 MetaLonDA (METAgenomic LONgitudinal Differential Abundance method) is a method that identifies the significant time intervals of microbial features in longitudinal studies. MetaLonDA has the ability to handle the inconsistencies and common challenges associated with human studies, such as variable sample collection times and uneven number of time points along the subjects’ longitudinal study. The method employs a negative binomial distribution in conjunction with a semi-parametric SS-ANOVA to model the read counts. Then, it performs the significance testing based on unit time intervals using permutation testing procedure.
