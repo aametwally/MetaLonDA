@@ -1,7 +1,7 @@
 # What is MetaLonDA?
 
 [![Build Status](https://travis-ci.org/aametwally/MetaLonDA.svg?branch=master)](https://travis-ci.org/aametwally/MetaLonDA)
-[![Rdoc](http://www.rdocumentation.org/badges/version/MetaLonDA)](http://www.rdocumentation.org/packages/MetaLonDA)
+[![Rdoc](https://www.rdocumentation.org/badges/version/MetaLonDA)](http://www.rdocumentation.org/packages/MetaLonDA)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/MetaLonDA)](https://cran.r-project.org/package=MetaLonDA)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/MetaLonDA)](https://cranlogs.r-pkg.org/badges/grand-total/MetaLonDA)
 [![License](https://img.shields.io/badge/license-MIT-red.svg)](https://en.wikipedia.org/wiki/MIT_License)
