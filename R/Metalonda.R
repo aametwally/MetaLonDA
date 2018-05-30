@@ -247,7 +247,7 @@ metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
   ## Normalization
   if(norm.method != "none")
   {
-    if(norm.method == "css" | norm.method == "tmm" | norm.method == "ra" | norm.method == "log10" | norm.method == "median-ratio")
+    if(norm.method == "css" | norm.method == "tmm" | norm.method == "ra" | norm.method == "log10" | norm.method == "median_ratio")
     {
       cat("Normalizaton method = ", norm.method, "\n")
       Count = normalize(Count, method = norm.method)
