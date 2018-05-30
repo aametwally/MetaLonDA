@@ -193,7 +193,7 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
 #' @param pvalue.threshold p-value threshold cutoff
 #' @param adjust.method Multiple testing correction methods
 #' @param time.unit time unit used in the Time vector (hours, days, weeks, months, etc.)
-#' @param norm.method normalization method to be used to normalize count matrix (CSS, median-ratio, etc.) 
+#' @param norm.method normalization method to be used to normalize count matrix (css, tmm, ra, log10, median_ratio) 
 #' @param prefix prefix for the output figure
 #' @return Returns a list of the significant features a long with their significant time intervals
 #' @references
