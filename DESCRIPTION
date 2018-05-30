@@ -7,7 +7,7 @@ Author: Ahmed Metwally, Yang Dai, Patricia Finn, David Perkins
 Maintainer: Ahmed Metwally <ametwa2@uic.edu>
 URL: https://github.com/aametwally/MetaLonDA
 BugReports: https://github.com/aametwally/MetaLonDA/issues
-Description: Identify time intervals of differentially abundant metagenomics features in longitudinal studies.
+Description: Identify time intervals of differentially abundant metagenomics features in longitudinal studies. (Metwally AA, et. al., Microbiome, 2018 <https://doi.org/10.1186/s40168-018-0402-y>)
 License: MIT + file LICENSE
 Depends:
     R(>= 3.2.0)
