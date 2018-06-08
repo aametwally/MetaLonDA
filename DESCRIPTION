@@ -15,6 +15,7 @@ Imports:
     gss,
     plyr,
     caTools,
+    zoo,
     ggplot2,
     parallel,
     doParallel,

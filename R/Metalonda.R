@@ -169,11 +169,39 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
   
   cat("\n\n")
   
-  output.details = list(feature = text, significant.interval = cbind(start = st, end = en), 
-       intervals.pvalue = pvalue.area, adjusted.pvalue = adjusted.pvalue, area.sign = area$ar.sign)
-  output.summary = data.frame(feature = rep(text, length(interval$start)), start = st, end = en,
-                 dominant = interval$dominant, pvalue = interval$pvalue)
+  ## Calculate start, end, dominant for each interval
+  interval.start = points[-length(points)]
+  interval.end = points[-1]
+  dominant = area$ar.sign
+  dominant[which(dominant == 1)] = gr.1
+  dominant[which(dominant == -1)] = gr.2
   
+  
+  ## Prepare Log2FoldChange
+  avg.mod0.count = rollapply(model$dd.0$Count, 2, mean)
+  avg.mod1.count = rollapply(model$dd.1$Count, 2, mean)
+  foldChange = avg.mod0.count/avg.mod1.count
+  log2FoldChange = log2(foldChange)
+  
+  
+  output.details = list(feature = text, significant.interval = cbind(start = st, end = en), 
+                        interval.start = interval.start, interval.end = interval.end,
+                        avg.mod0.count = avg.mod0.count, avg.mod1.count = avg.mod1.count, 
+                        foldChange = foldChange, log2FoldChange = log2FoldChange, 
+                        areaRatio = area$ar, areaRatio.abs = area$ar.abs, areaRatio.sign = area$ar.sign, dominant = dominant,
+                        intervals.pvalue = pvalue.area, adjusted.pvalue = adjusted.pvalue)
+  output.summary = data.frame(feature = rep(text, length(interval$start)), start = st, end = en,
+                        dominant = interval$dominant, pvalue = interval$pvalue)
+
+  
+  ## Output table that summarize time intervals statistics
+  feature.summary = do.call(cbind, output.details[c("interval.start", "interval.end", 
+                                                    "avg.mod0.count", "avg.mod1.count", "foldChange", "log2FoldChange",
+                                                    "areaRatio", "areaRatio.abs", "areaRatio.sign", "dominant", "intervals.pvalue", 
+                                                    "adjusted.pvalue")])
+  write.csv(feature.summary, file = sprintf("Feature_%s_Summary.csv", text), row.names = FALSE)
+  
+
   return(list(detailed = output.details, summary = output.summary))
 }
 

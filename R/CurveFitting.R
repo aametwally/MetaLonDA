@@ -25,24 +25,28 @@
 curveFitting = function(df, method = "nbinomial", points){
   
   ## Seprate the two groups
+  group.null = df
   group.0 = df[df$Group==0, ]
   group.1 = df[df$Group==1, ]
-  group.null = df
-
+  
   ## Fitting 
   if(method == "nbinomial"){
+    
     ## null model
     mod.null = gssanova(Count ~ Time, data = group.null, family = "nbinomial", skip.iter=TRUE)
+    mod.null.nbinomial.project = project(mod.null, c("Time"))
+    
     ## full model
     mod.0 = gssanova(Count ~ Time, data = group.0, family = "nbinomial", skip.iter=TRUE)
     mod.1 = gssanova(Count ~ Time, data = group.1, family = "nbinomial", skip.iter=TRUE)
     mod.0.nbinomial.project = project(mod.0, c("Time"))
     mod.1.nbinomial.project = project(mod.1, c("Time"))
-    mod.null.nbinomial.project = project(mod.null, c("Time"))
   }
   else if(method == "lowess"){
+    
     ## null model
     mod.null = loess(Count ~ Time, data = group.null)
+    
     ## full model
     mod.0 = loess(Count ~ Time, data = group.0)
     mod.1 = loess(Count ~ Time, data = group.1)
@@ -80,6 +84,7 @@ curveFitting = function(df, method = "nbinomial", points){
     dd.1.u95 = data.frame(Time = points, Count = (est.1$fit + 1.96*est.1$se), Group = "fit.1.u", ID = "fit.1.u")
     dd.1.l95 = data.frame(Time = points, Count = (est.1$fit - 1.96*est.1$se), Group = "fit.1.l", ID = "fit.1.l")
   } else{
+    
     ## Curve dataframe
     dd.null = data.frame(Time = points, Count = mod.null$nu/exp(est.null$fit), Group = "null", ID = "null")
     dd.0 = data.frame(Time = points, Count = mod.0$nu/exp(est.0$fit), Group = "fit.0", ID = "fit.0")
@@ -92,7 +97,6 @@ curveFitting = function(df, method = "nbinomial", points){
     dd.0.l95 = data.frame(Time = points, Count = mod.0$nu/exp(est.0$fit - 1.96*est.0$se), Group = "fit.0.l", ID = "fit.0.l")
     dd.1.u95 = data.frame(Time = points, Count = mod.1$nu/exp(est.1$fit + 1.96*est.1$se), Group = "fit.1.u", ID = "fit.1.u")
     dd.1.l95 = data.frame(Time = points, Count = mod.1$nu/exp(est.1$fit - 1.96*est.1$se), Group = "fit.1.l", ID = "fit.1.l")
-    
   }
   
   ## Return the results
