@@ -53,13 +53,13 @@ time.unit = "pppp"
 output.metalonda.f5 = metalonda(Count = metalonda_test_data[5,], Time = Time, Group = Group,
                                 ID = ID, n.perm = 5, fit.method = "nbinomial", points = points,
                                 text = rownames(metalonda_test_data)[5], parall = FALSE, pvalue.threshold = 0.05,     
-                                adjust.method = "BH")
+                                adjust.method = "BH", col = c("black", "green"))
 
 
 output.metalonda.all = metalondaAll(Count = metalonda_test_data, Time = Time, Group = Group,
                                     ID = ID, n.perm = 5, fit.method = "nbinomial", num.intervals = 100, 
                                     parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH", time.unit = "hours", 
-                                    norm.method = "none", prefix = "Test")
+                                    norm.method = "none", prefix = "Test", ylabel = "DIVERSITYYY", col = c("black", "green"))
 
 
 

@@ -23,15 +23,15 @@
 #' aggregate.df = data.frame(Count = metalonda_test_data[1,], Time = Time, Group = Group, ID = ID)
 #' visualizeFeature(aggregate.df, text = rownames(metalonda_test_data)[1], Group)
 #' @export
-visualizeFeature = function (df, text, group.levels, unit = "days")
+visualizeFeature = function (df, text, group.levels, unit = "days", ylabel = "Normalized Count", col = c("blue", "firebrick"))
 {
   cat("Visualizing Feature = ", text, "\n")
   Count=0; Time=0; ID=0; Group=0 ## This line is just to pass the CRAN checks for the aes in ggplot2
   
   p = ggplot(df, aes(Time, Count, colour = Group, group = interaction(Group, ID)))
-  p = p + geom_point(size=1, alpha=0.5) + geom_line(size=1, alpha=0.7) +  theme_bw() +
-    ggtitle(paste("Feature = ", text, sep = "")) + labs(y = "Normalized Count", x = sprintf("Time (%s)", unit)) +
-    scale_colour_manual(values = c("skyblue", "pink"), breaks = c("0", "1"),
+  p = p + geom_point(size = 1, alpha = 0.5) + geom_line(size = 1, alpha = 0.7) +  theme_bw() +
+    ggtitle(paste("Feature = ", text, sep = "")) + labs(y = ylabel, x = sprintf("Time (%s)", unit)) +
+    scale_colour_manual(values = col, breaks = c("0", "1"),
                         labels = c(group.levels[1], group.levels[2])) +
     theme(axis.text.x = element_text(colour="black", size=12, angle=0, hjust=0.5, vjust=0.5, face="bold"),
           axis.text.y = element_text(colour="black", size=12, angle=0, hjust=0.5, vjust=0.5, face="bold"),
@@ -62,7 +62,7 @@ visualizeFeature = function (df, text, group.levels, unit = "days")
 #' @references
 #' Ahmed Metwally (ametwa2@uic.edu)
 #' @export
-visualizeFeatureSpline = function (df, model, method, text, group.levels, unit = "days")
+visualizeFeatureSpline = function (df, model, method, text, group.levels, unit = "days", ylabel = "Normalized Count", col = c("blue", "firebrick"))
 { 
   cat("Visualizing Splines of Feature = ", text, "\n")
     
@@ -79,9 +79,8 @@ visualizeFeatureSpline = function (df, model, method, text, group.levels, unit =
   
   p = ggplot(dm, aes(Time, Count, colour = Group, group = interaction(Group, ID)))
   p = p + theme_bw() + geom_point(size=1, alpha=0.5) + geom_line(aes(linetype=lnn), size=1, alpha=0.5) + 
-    ggtitle(paste("Feature = ", text, sep = "")) + labs(y = "Normalized Count", x = sprintf("Time (%s)", unit)) +
-    scale_colour_manual(values = c("skyblue", "pink", "blue", "firebrick",
-                                   "blue",  "blue",  "firebrick", "firebrick"), 
+    ggtitle(paste("Feature = ", text, sep = "")) + labs(y = ylabel, x = sprintf("Time (%s)", unit)) +
+    scale_colour_manual(values = c(col, col), 
                         breaks = c("0", "1", "fit.0", "fit.1"),
                         labels = c(group.levels[1], group.levels[2], paste(group.levels[1], ".fit", sep=""), paste(group.levels[2], ".fit", sep="")))+
     theme(axis.text.x = element_text(colour="black", size=12, angle=0, hjust=0.5, vjust=0.5, face="bold"),
@@ -145,7 +144,7 @@ visualizeARHistogram = function(permuted, text, method){
 #' @references
 #' Ahmed Metwally (ametwa2@uic.edu)
 #' @export
-visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group.levels, unit = "days")
+visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group.levels, unit = "days", ylabel = "Normalized Count", col = c("blue", "firebrick"))
 {
   cat("Visualizing Significant Intervals of Feature = ", text, "\n")
   Time = 0 ## This line is just to pass the CRAN checks for the aes in ggplot2
@@ -174,8 +173,8 @@ visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group
   dm = rbind(dd.0, dd.1)
   p1 = 'ggplot(dm, aes(Time, Count, colour = Group, group = interaction(Group, ID))) + 
   theme_bw() + geom_point(size = 1, alpha = 0.5) + geom_line(size = 1, alpha = 0.5) + 
-  ggtitle(paste("Feature = ", text, sep = "")) + labs(y = "Normalized Count", x = sprintf("Time (%s)", unit)) +
-  scale_colour_manual(values = c("blue", "firebrick"), 
+  ggtitle(paste("Feature = ", text, sep = "")) + labs(y = ylabel, x = sprintf("Time (%s)", unit)) +
+  scale_colour_manual(values = col, 
   breaks = c("fit.0", "fit.1"),
   labels = c(paste(group.levels[1], ".fit", sep = ""), paste(group.levels[2], ".fit", sep = ""))) +
   theme(axis.text.x = element_text(colour = "black", size = 12, angle = 0, hjust = 0.5, vjust = 0.5, face = "bold"),
@@ -206,7 +205,7 @@ visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group
 #' @references
 #' Ahmed Metwally (ametwa2@uic.edu)
 #' @export
-visualizeTimeIntervals = function(interval.details, prefix = "MetaLonDA_timeline", unit = "days")
+visualizeTimeIntervals = function(interval.details, prefix = "MetaLonDA_timeline", unit = "days", col = c("blue", "firebrick"))
 {
   feature=0;dominant=0;ID=0;Group=0;lnn=0 ## This line is just to pass the CRAN checks for the aes in ggplot2
   interval.details$dominant = as.factor(interval.details$dominant)
@@ -216,7 +215,7 @@ visualizeTimeIntervals = function(interval.details, prefix = "MetaLonDA_timeline
   
   ggplot(interval.details, aes(ymin = start , ymax = end, x = feature, xend = feature)) + 
     geom_linerange(aes(color = dominant), size = 1) + 
-    coord_flip() +  scale_colour_manual(values=c("blue", "firebrick")) +
+    coord_flip() +  scale_colour_manual(values = col) +
     labs(x = "Feature", y = sprintf("Time (%s)", unit), colour="Dominant") + 
      theme(axis.text.x = element_text(colour = "black", size = 10, angle = 0, hjust = 0.5, vjust = 0.5, face = "bold"),
            axis.text.y = element_text(colour = "black", size = 8, angle = 0, vjust = 0.5, face = "bold"),
