@@ -95,35 +95,6 @@ visualizeFeatureSpline = function (df, model, method, text, group.levels, unit =
 }
 
 
-#' Visualize Area Ratio (AR) empirical distribution
-#'
-#' Visualize Area Ratio (AR) empirical distribution for each time interval
-#'
-#' @param permuted Permutation of the permuted data
-#' @param text Feature name
-#' @param method fitting method
-#' @import ggplot2
-#' @import grDevices
-#' @import graphics
-#' @references
-#' Ahmed Metwally (ametwa2@uic.edu)
-#' @export
-visualizeARHistogram = function(permuted, text, method){
-  cat("Visualizing AR Distribution for Feature = ", text, "\n")
-  n = ncol(permuted)
-  r = ceiling(sqrt(n))
-  c = ceiling(sqrt(n))
-	jpeg(paste("Feature_", text, "_AR_distribution_", method, ".jpg", sep = ""), res = 1200, height = r*5, width = c*5, units = 'cm')
-  par(mfrow=c(r,c))
-  
-  for( i in 1:ncol(permuted)){
-    hist(permuted[,i], xlab = "AR Ratio", ylab = "Frequency", 
-         breaks = 10, col = "yellow", border = "red", 
-         main = paste("Interval # ", i, sep=""), xlim = c(0,1))
-  }
-  dev.off()
-}
-
 
 
 #' Visualize significant time interval
@@ -227,4 +198,73 @@ visualizeTimeIntervals = function(interval.details, prefix = "MetaLonDA_timeline
           panel.grid.major.x = element_line(colour = "white",size = 0.75)) +
     theme(legend.position="top", panel.border = element_rect(colour = "black", fill = NA, size = 2))
   ggsave(filename = paste(prefix, "_MetaLonDA_TimeIntervals.jpg", sep=""), dpi = 1200, height = 30, width = 20, units = 'cm')
+}
+
+
+
+
+#' Visualize Area Ratio (AR) empirical distribution
+#'
+#' Visualize Area Ratio (AR) empirical distribution for each time interval
+#'
+#' @param permuted Permutation of the permuted data
+#' @param text Feature name
+#' @param method fitting method
+#' @import ggplot2
+#' @import grDevices
+#' @import graphics
+#' @references
+#' Ahmed Metwally (ametwa2@uic.edu)
+#' @export
+visualizeARHistogram = function(permuted, text, method){
+  cat("Visualizing AR Distribution for Feature = ", text, "\n")
+  n = ncol(permuted)
+  r = ceiling(sqrt(n))
+  c = ceiling(sqrt(n))
+  jpeg(paste("Feature_", text, "_AR_distribution_", method, ".jpg", sep = ""), res = 1200, height = r*5, width = c*5, units = 'cm')
+  par(mfrow=c(r,c))
+  
+  for( i in 1:ncol(permuted)){
+    hist(permuted[,i], xlab = "AR Ratio", ylab = "Frequency", 
+         breaks = 10, col = "yellow", border = "red", 
+         main = paste("Interval # ", i, sep=""), xlim = c(0,1))
+  }
+  dev.off()
+}
+
+
+
+#' Visualize log2 fold-change and significance of each interval as volcano plot
+#'
+#' Visualize log2 fold-change and significance of each interval as volcano plot
+#'
+#' @param feature.summary Dataframe has a detailed summary about feature's significant intervals
+#' @param text Feature name
+#' @import ggplot2
+#' @import grDevices
+#' @import graphics
+#' @references
+#' Ahmed Metwally (ametwa2@uic.edu)
+#' @export
+visualizeVolcanoPlot = function(feature.summary, text){
+  cat("Visualizing Volcano Plot of Feature = ", text, "\n")
+  # Highlight genes that have an absolute fold change > 2 and a p-value < Bonferroni cut-off
+  feature.summary$adjusted.pvalue_pseudo = feature.summary$adjusted.pvalue
+  feature.summary$adjusted.pvalue_pseudo[which(feature.summary$adjusted.pvalue == 0)] = 0.00001
+  feature.summary$threshold = as.factor(abs(feature.summary$foldChange) > 2 | abs(feature.summary$foldChange) < 0.5 & feature.summary$adjusted.pvalue_pseudo < 0.05/dim(test)[1])
+  
+  ggplot(data=feature.summary, aes(x=log2FoldChange, y=-log10(adjusted.pvalue_pseudo), colour=threshold)) +
+    geom_point(alpha=0.4, size=1.75) + theme_bw() +
+    #xlim(c(-10, 10)) + ylim(c(0, 15)) +
+    scale_colour_manual(values = c("black", "red",  "green")) +
+    xlab("log2 fold change") + ylab("-log10 p-value") +
+    theme(axis.text.x = element_text(colour="black", size=12, angle=0, hjust=0.5, vjust=0.5, face="bold"),
+          axis.text.y = element_text(colour="black", size=12, angle=0, hjust=0.5, vjust=0.5, face="bold"),
+          axis.title.x = element_text(colour="black", size=15, angle=0, hjust=.5, vjust=0.5, face="bold"),
+          axis.title.y = element_text(colour="black", size=15, angle=90, hjust=.5, vjust=.5, face="bold"),
+          legend.text=element_text(size=15, face="plain"), legend.title = element_blank(),
+          plot.title = element_text(hjust = 0.5), legend.position="none")
+  # geom_text(aes(x=test$log2FoldChange, y=-log10(test$adjusted.pvalue_pseudo),
+  #               label=rownames(test), size=.2), colour="black")
+  ggsave(filename = paste("Feature_", text, "_VolcanoPlot.jpg", sep=""), dpi = 1200, height = 10, width = 10, units = 'cm')
 }

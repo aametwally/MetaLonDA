@@ -167,7 +167,7 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
     visualizeArea(aggregate.df, model, fit.method, st, en, text, group.levels, unit = time.unit, ylabel = ylabel, col = col)
   }
   
-  cat("\n\n")
+
   
   ## Calculate start, end, dominant for each interval
   interval.start = points[-length(points)]
@@ -184,7 +184,7 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
   log2FoldChange = log2(foldChange)
   
   
-  output.details = list(feature = text, significant.interval = cbind(start = st, end = en), 
+  output.details = list(feature = rep(text, length(interval.start)), 
                         interval.start = interval.start, interval.end = interval.end,
                         avg.mod0.count = avg.mod0.count, avg.mod1.count = avg.mod1.count, 
                         foldChange = foldChange, log2FoldChange = log2FoldChange, 
@@ -194,14 +194,13 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
                         dominant = interval$dominant, pvalue = interval$pvalue)
 
   
-  ## Output table that summarize time intervals statistics
-  feature.summary = do.call(cbind, output.details[c("interval.start", "interval.end", 
-                                                    "avg.mod0.count", "avg.mod1.count", "foldChange", "log2FoldChange",
-                                                    "areaRatio", "areaRatio.abs", "areaRatio.sign", "dominant", "intervals.pvalue", 
-                                                    "adjusted.pvalue")])
+  ## Output table and volcano plot that summarize time intervals statistics
+  feature.summary = as.data.frame(do.call(cbind, output.details), stringsAsFactors = FALSE)
   write.csv(feature.summary, file = sprintf("Feature_%s_Summary.csv", text), row.names = FALSE)
+  x = as.data.frame(sapply(feature.summary[, c("foldChange","log2FoldChange", "intervals.pvalue", "adjusted.pvalue")], as.numeric))
+  visualizeVolcanoPlot(feature.summary = x, text)
+  cat("\n\n")
   
-
   return(list(detailed = output.details, summary = output.summary))
 }
 
