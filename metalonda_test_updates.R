@@ -1,4 +1,5 @@
 setwd("~/Dropbox/metalonda_work/updateMetalonda/MetaLonDA")
+detach("package:MetaLonDA", unload=TRUE)
 source("R/CurveFitting.R")
 source("R/Visualization.R")
 source("R/Permutation.R")

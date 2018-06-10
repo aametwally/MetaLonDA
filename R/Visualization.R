@@ -251,7 +251,7 @@ visualizeVolcanoPlot = function(feature.summary, text){
   # Highlight genes that have an absolute fold change > 2 and a p-value < Bonferroni cut-off
   feature.summary$adjusted.pvalue_pseudo = feature.summary$adjusted.pvalue
   feature.summary$adjusted.pvalue_pseudo[which(feature.summary$adjusted.pvalue == 0)] = 0.00001
-  feature.summary$threshold = as.factor(abs(feature.summary$foldChange) > 2 | abs(feature.summary$foldChange) < 0.5 & feature.summary$adjusted.pvalue_pseudo < 0.05/dim(test)[1])
+  feature.summary$threshold = as.factor(abs(feature.summary$foldChange) > 2 | abs(feature.summary$foldChange) < 0.5 & feature.summary$adjusted.pvalue_pseudo < 0.05/dim(feature.summary)[1])
   
   ggplot(data=feature.summary, aes(x=log2FoldChange, y=-log10(adjusted.pvalue_pseudo), colour=threshold)) +
     geom_point(alpha=0.4, size=1.75) + theme_bw() +
