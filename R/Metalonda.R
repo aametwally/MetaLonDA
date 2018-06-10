@@ -198,7 +198,8 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
   feature.summary = as.data.frame(do.call(cbind, output.details), stringsAsFactors = FALSE)
   write.csv(feature.summary, file = sprintf("Feature_%s_Summary.csv", text), row.names = FALSE)
   x = as.data.frame(sapply(feature.summary[, c("foldChange","log2FoldChange", "intervals.pvalue", "adjusted.pvalue")], as.numeric))
-  visualizeVolcanoPlot(feature.summary = x, text)
+  #visualizeVolcanoPlot(feature.summary = x, text)
+  visualizeVolcanoPlot_optimized(df = x, text)
   cat("\n\n")
   
   return(list(detailed = output.details, summary = output.summary))

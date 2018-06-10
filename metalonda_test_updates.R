@@ -60,7 +60,7 @@ output.metalonda.f5 = metalonda(Count = metalonda_test_data[5,], Time = Time, Gr
 
 
 output.metalonda.all = metalondaAll(Count = metalonda_test_data, Time = Time, Group = Group,
-                                    ID = ID, n.perm = 5, fit.method = "nbinomial", num.intervals = 100, 
+                                    ID = ID, n.perm = 100, fit.method = "nbinomial", num.intervals = 100, 
                                     parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH", time.unit = "hours", 
-                                    norm.method = "none", prefix = "Test", ylabel = "DIVERSITYYY", col = c("black", "green"))
+                                    norm.method = "none", prefix = "Test", ylabel = "Read Counts", col = c("black", "green"))
 
