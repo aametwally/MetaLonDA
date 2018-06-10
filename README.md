@@ -42,7 +42,7 @@ install.packages("MetaLonDA")
 Download the latest development code of MetaLonDA from GitHub using devtools
 ```
 library(devtools)
-install_github("aametwally/MetaLonDA")
+install_github("aametwally/MetaLonDA", ref = "v1.1.2")
 ```
 
 
@@ -81,9 +81,9 @@ points = seq(1, 10, length.out = 100)
 ```
 ## Identify significant time intervals of the 5th feature: 
 output.metalonda.f5 = metalonda(Count = metalonda_test_data[5,], Time = Time, Group = Group,
-                                ID = ID, n.perm = 100, fit.method = "nbinomial", points = points,
+                                ID = ID, n.perm = 5, fit.method = "nbinomial", points = points,
                                 text = rownames(metalonda_test_data)[5], parall = FALSE, pvalue.threshold = 0.05,     
-                                adjust.method = "BH")
+                                adjust.method = "BH", col = c("black", "green"))
 ```
 
 In our example, we used 20 permutations just to showcase how MetaLonDA works. In real analysis, this number should be much higher. Three figures are generated after running the above snippet:
@@ -113,9 +113,9 @@ In our example, we used 20 permutations just to showcase how MetaLonDA works. In
 ```
 ## Identify significant time intervals for all features: 
 output.metalonda.all = metalondaAll(Count = metalonda_test_data, Time = Time, Group = Group,
-  ID = ID, n.perm = 100, fit.method = "nbinomial", num.intervals = 100, 
-  parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH", time.unit = "hours", norm.method = "none",
-  prefix = "Test")
+                                    ID = ID, n.perm = 100, fit.method = "nbinomial", num.intervals = 100, 
+                                    parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH", time.unit = "hours", 
+                                    norm.method = "none", prefix = "Test", ylabel = "Read Counts", col = c("black","green"))
   
 ```
 
