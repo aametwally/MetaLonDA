@@ -255,7 +255,7 @@ visualizeVolcanoPlot = function(feature.summary, text){
   
   ggplot(data=feature.summary, aes(x=log2FoldChange, y=-log10(adjusted.pvalue_pseudo), colour=threshold)) +
     geom_point(alpha=0.4, size=1.75) + theme_bw() +
-    #xlim(c(-10, 10)) + ylim(c(0, 15)) +
+    ggtitle(paste("Feature = ", text, sep = ""))  +
     scale_colour_manual(values = c("black", "red",  "green")) +
     xlab("log2 fold change") + ylab("-log10 p-value") +
     theme(axis.text.x = element_text(colour="black", size=12, angle=0, hjust=0.5, vjust=0.5, face="bold"),
