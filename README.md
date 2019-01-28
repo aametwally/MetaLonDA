@@ -72,7 +72,7 @@ Group = factor(c(rep("A", n.sample*n.timepoints), rep("B",n.sample*n.timepoints)
 Time = rep(rep(1:n.timepoints, times = n.sample), 2)
 ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 
-## Define the prediction timeponits 
+## Define the prediction timepoints 
 points = seq(1, 10, length.out = 100)
 ```
 
