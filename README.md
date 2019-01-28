@@ -81,7 +81,7 @@ points = seq(1, 10, length.out = 100)
 ```
 ## Identify significant time intervals of the 5th feature: 
 output.metalonda.f5 = metalonda(Count = metalonda_test_data[5,], Time = Time, Group = Group,
-                                ID = ID, n.perm = 100, fit.method = "nbinomial", points = points,
+                                ID = ID, n.perm = 20, fit.method = "nbinomial", points = points,
                                 text = rownames(metalonda_test_data)[5], parall = FALSE, pvalue.threshold = 0.05,     
                                 adjust.method = "BH")
 ```
