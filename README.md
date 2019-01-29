@@ -118,7 +118,7 @@ output.metalonda.all = metalondaAll(Count = metalonda_test_data, Time = Time, Gr
   prefix = "Test")
   
 ```
-
+__Notice the absence of the points and text arguments used when testing one feature__
 After running the above snippet for testing all features in the count matrix, along with the 2-3 figures for each feature, MetaLonDA produces the following two summary files:
 
 
