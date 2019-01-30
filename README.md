@@ -86,7 +86,7 @@ output.metalonda.f5 = metalonda(Count = metalonda_test_data[5,], Time = Time, Gr
                                 adjust.method = "BH")
 ```
 
-In our example, we used 20 permutations just to showcase how MetaLonDA works. In real analysis, this number should be much higher. Three figures are generated after running the above snippet:
+In our example, we used 100 permutations just to showcase how MetaLonDA works. In real analysis, this number should be much higher. Three figures are generated after running the above snippet:
 
 
 <br> 
