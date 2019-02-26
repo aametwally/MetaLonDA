@@ -7,7 +7,8 @@
 metalondaAll(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomial",
   num.intervals = 100, parall = FALSE, pvalue.threshold = 0.05,
   adjust.method = "BH", time.unit = "days", norm.method = "none",
-  prefix = "Output")
+  prefix = "Output", ylabel = "Normalized Count", col = c("blue",
+  "firebrick"))
 }
 \arguments{
 \item{Count}{Count matrix of all features}
@@ -20,7 +21,7 @@ metalondaAll(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomial",
 
 \item{n.perm}{number of permutations}
 
-\item{fit.method}{The fitting method (NB, LOWESS)}
+\item{fit.method}{The fitting method (nbinomial, lowess)}
 
 \item{num.intervals}{The number of time intervals at which metalonda test differential abundance}
 
@@ -32,9 +33,13 @@ metalondaAll(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomial",
 
 \item{time.unit}{time unit used in the Time vector (hours, days, weeks, months, etc.)}
 
-\item{norm.method}{normalization method to be used to normalize count matrix (CSS, median-ratio, etc.)}
+\item{norm.method}{normalization method to be used to normalize count matrix (css, tmm, ra, log10, median_ratio)}
 
 \item{prefix}{prefix for the output figure}
+
+\item{ylabel}{text to be shown on the y-axis of all generated figures (default: "Normalized Count")}
+
+\item{col}{two color to be used for the two groups (eg., c("red", "blue")).}
 }
 \value{
 Returns a list of the significant features a long with their significant time intervals
@@ -55,9 +60,10 @@ points = seq(1, 10, length.out = 10)
 output.nbinomial = metalondaAll(Count = metalonda_test_data, Time = Time, Group = Group,
 ID = ID, n.perm = 10, fit.method =  "nbinomial", num.intervals = 100, 
 parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH", 
-time.unit = "hours", norm.method = "none", prefix = "Test")
+time.unit = "hours", norm.method = "none", prefix = "Test",  time.unit = "hours", 
+ylabel = "Normalized Count", col = c("black", "green"))
 }
 }
 \references{
-Ahmed Metwally (ametwa2@uic.edu)
+Ahmed Metwally (ametwall@stanford.edu)
 }

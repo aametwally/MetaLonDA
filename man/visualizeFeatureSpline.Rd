@@ -4,7 +4,8 @@
 \alias{visualizeFeatureSpline}
 \title{Visualize the feature trajectory with the fitted Splines}
 \usage{
-visualizeFeatureSpline(df, model, method, text, group.levels, unit = "days")
+visualizeFeatureSpline(df, model, method, text, group.levels, unit = "days",
+  ylabel = "Normalized Count", col = c("blue", "firebrick"))
 }
 \arguments{
 \item{df}{dataframe has the Count , Group, ID, Time}
@@ -18,10 +19,14 @@ visualizeFeatureSpline(df, model, method, text, group.levels, unit = "days")
 \item{group.levels}{The two level's name}
 
 \item{unit}{time unit used in the Time vector (hours, days, weeks, months, etc.)}
+
+\item{ylabel}{text to be shown on the y-axis of all generated figures (default: "Normalized Count")}
+
+\item{col}{two color to be used for the two groups (eg., c("red", "blue")).}
 }
 \description{
 Plot the longitudinal features along with the fitted splines
 }
 \references{
-Ahmed Metwally (ametwa2@uic.edu)
+Ahmed Metwally (ametwall@stanford.edu)
 }

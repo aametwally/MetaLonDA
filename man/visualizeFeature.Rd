@@ -4,7 +4,8 @@
 \alias{visualizeFeature}
 \title{Visualize Longitudinal Feature}
 \usage{
-visualizeFeature(df, text, group.levels, unit = "days")
+visualizeFeature(df, text, group.levels, unit = "days",
+  ylabel = "Normalized Count", col = c("blue", "firebrick"))
 }
 \arguments{
 \item{df}{dataframe has the Count, Group, ID, Time}
@@ -14,6 +15,10 @@ visualizeFeature(df, text, group.levels, unit = "days")
 \item{group.levels}{The two level's name}
 
 \item{unit}{time interval unit}
+
+\item{ylabel}{text to be shown on the y-axis of all generated figures (default: "Normalized Count")}
+
+\item{col}{two color to be used for the two groups (eg., c("red", "blue")).}
 }
 \description{
 Visualize Longitudinal Feature
@@ -31,5 +36,5 @@ aggregate.df = data.frame(Count = metalonda_test_data[1,], Time = Time, Group = 
 visualizeFeature(aggregate.df, text = rownames(metalonda_test_data)[1], Group)
 }
 \references{
-Ahmed Metwally (ametwa2@uic.edu)
+Ahmed Metwally (ametwall@stanford.edu)
 }

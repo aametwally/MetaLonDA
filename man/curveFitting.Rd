@@ -9,7 +9,7 @@ curveFitting(df, method = "nbinomial", points)
 \arguments{
 \item{df}{dataframe has the Count, Group, ID, Time}
 
-\item{method}{fitting method (negative binomial, LOWESS)}
+\item{method}{fitting method (nbinomial, lowess)}
 
 \item{points}{points at which the prediction should happen}
 }
@@ -32,5 +32,5 @@ aggretage.df = data.frame(Count = metalonda_test_data[1,], Time = Time, Group = 
 cf = curveFitting(df = aggretage.df, method= "nbinomial", points)
 }
 \references{
-Ahmed Metwally (ametwa2@uic.edu)
+Ahmed Metwally (ametwall@stanford.edu)
 }

@@ -17,5 +17,5 @@ visualizeARHistogram(permuted, text, method)
 Visualize Area Ratio (AR) empirical distribution for each time interval
 }
 \references{
-Ahmed Metwally (ametwa2@uic.edu)
+Ahmed Metwally (ametwall@stanford.edu)
 }

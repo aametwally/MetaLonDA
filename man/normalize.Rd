@@ -15,5 +15,5 @@ normalize(count, method = "css")
 Normalize count matrix
 }
 \references{
-Ahmed Metwally (ametwa2@uic.edu)
+Ahmed Metwally (ametwall@stanford.edu)
 }

@@ -25,5 +25,5 @@ sign = c(1, 1, 1, 1, -1, -1, 1, 1)
 findSigInterval(p, threshold = 0.05, sign)
 }
 \references{
-Ahmed Metwally (ametwa2@uic.edu)
+Ahmed Metwally (ametwall@stanford.edu)
 }
