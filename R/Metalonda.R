@@ -38,7 +38,7 @@
 #' @export
 metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomial", 
                       points, text = 0, parall = FALSE, pvalue.threshold = 0.05, 
-                      adjust.method = "BH", time.unit = "days")
+                      adjust.method = "BH", time.unit = "days", ylabel = "Normalized Count", col = c("blue", "firebrick"))
 {
   cat("Start MetaLonDA \n")
 
@@ -72,7 +72,7 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
 
 
   ## Visualize feature's abundance accross different time points  
-  visualizeFeature(aggregate.df, text, group.levels, unit = time.unit)
+  visualizeFeature(aggregate.df, text, group.levels, unit = time.unit, ylabel = ylabel, col = col)
 
 
   
@@ -111,7 +111,7 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
   }
   
   ## Visualize feature's trajectories spline
-  visualizeFeatureSpline(aggregate.df, model, fit.method, text, group.levels, unit = time.unit)
+  visualizeFeatureSpline(aggregate.df, model, fit.method, text, group.levels, unit = time.unit, ylabel = ylabel, col = col)
  
    
   ## Calculate area under the fitted curve for each time interval
@@ -164,15 +164,43 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
   if(length(st) > 0)
   {
     ## Visualize sigificant area
-    visualizeArea(aggregate.df, model, fit.method, st, en, text, group.levels, unit = time.unit)
+    visualizeArea(aggregate.df, model, fit.method, st, en, text, group.levels, unit = time.unit, ylabel = ylabel, col = col)
   }
   
-  cat("\n\n")
+
   
-  output.details = list(feature = text, significant.interval = cbind(start = st, end = en), 
-       intervals.pvalue = pvalue.area, adjusted.pvalue = adjusted.pvalue, area.sign = area$ar.sign)
+  ## Calculate start, end, dominant for each interval
+  interval.start = points[-length(points)]
+  interval.end = points[-1]
+  dominant = area$ar.sign
+  dominant[which(dominant == 1)] = gr.1
+  dominant[which(dominant == -1)] = gr.2
+  
+  
+  ## Prepare Log2FoldChange
+  avg.mod0.count = rollapply(model$dd.0$Count, 2, mean)
+  avg.mod1.count = rollapply(model$dd.1$Count, 2, mean)
+  foldChange = avg.mod0.count/avg.mod1.count
+  log2FoldChange = log2(foldChange)
+  
+  
+  output.details = list(feature = rep(text, length(interval.start)), 
+                        interval.start = interval.start, interval.end = interval.end,
+                        avg.mod0.count = avg.mod0.count, avg.mod1.count = avg.mod1.count, 
+                        foldChange = foldChange, log2FoldChange = log2FoldChange, 
+                        areaRatio = area$ar, areaRatio.abs = area$ar.abs, areaRatio.sign = area$ar.sign, dominant = dominant,
+                        intervals.pvalue = pvalue.area, adjusted.pvalue = adjusted.pvalue)
   output.summary = data.frame(feature = rep(text, length(interval$start)), start = st, end = en,
-                 dominant = interval$dominant, pvalue = interval$pvalue)
+                        dominant = interval$dominant, pvalue = interval$pvalue)
+
+  
+  ## Output table and volcano plot that summarize time intervals statistics
+  feature.summary = as.data.frame(do.call(cbind, output.details), stringsAsFactors = FALSE)
+  write.csv(feature.summary, file = sprintf("Feature_%s_Summary.csv", text), row.names = FALSE)
+  x = as.data.frame(sapply(feature.summary[, c("foldChange","log2FoldChange", "intervals.pvalue", "adjusted.pvalue")], as.numeric))
+  #visualizeVolcanoPlot(feature.summary = x, text)
+  visualizeVolcanoPlot_optimized(df = x, text)
+  cat("\n\n")
   
   return(list(detailed = output.details, summary = output.summary))
 }
@@ -217,7 +245,7 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
 metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
                          fit.method = "nbinomial", num.intervals = 100, parall = FALSE, 
                          pvalue.threshold = 0.05, adjust.method = "BH", time.unit = "days", 
-                         norm.method = "none", prefix = "Output")
+                         norm.method = "none", prefix = "Output", ylabel = "Normalized Count", col = c("blue", "firebrick"))
 {
   ## Check the dimentions of the annotation vectors and count matrix
   if(length(Time) == length(ID))
@@ -307,7 +335,8 @@ metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
     cat ("Feature  = ", rownames(data.count.filt)[i], "\n")
     out = metalonda(Count = data.count.filt[i,], Time = Time, Group = Group, ID = ID,
                           fit.method = fit.method, n.perm = n.perm, points = points, 
-                          text=rownames(data.count.filt)[i], parall = parall, pvalue.threshold, adjust.method, time.unit)
+                          text=rownames(data.count.filt)[i], parall = parall, pvalue.threshold, adjust.method, time.unit, 
+                    ylabel = ylabel, col = col)
     
     detailed[[i]] = out$detailed
     summary[[i]] = out$summary
@@ -319,7 +348,7 @@ metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
   
   ## Output table and figure that summarize the significant time intervals
   write.csv(summary.tmp, file = sprintf("%s_MetaLonDA_TimeIntervals.csv", prefix), row.names = FALSE)
-  visualizeTimeIntervals(interval.details = summary.tmp, prefix, unit = time.unit)
+  visualizeTimeIntervals(interval.details = summary.tmp, prefix, unit = time.unit, col = col)
   
   return(list(output.detail = detailed, output.summary = summary.tmp))
 }

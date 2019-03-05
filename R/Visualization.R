@@ -23,15 +23,15 @@
 #' aggregate.df = data.frame(Count = metalonda_test_data[1,], Time = Time, Group = Group, ID = ID)
 #' visualizeFeature(aggregate.df, text = rownames(metalonda_test_data)[1], Group)
 #' @export
-visualizeFeature = function (df, text, group.levels, unit = "days")
+visualizeFeature = function (df, text, group.levels, unit = "days", ylabel = "Normalized Count", col = c("blue", "firebrick"))
 {
   cat("Visualizing Feature = ", text, "\n")
   Count=0; Time=0; ID=0; Group=0 ## This line is just to pass the CRAN checks for the aes in ggplot2
   
   p = ggplot(df, aes(Time, Count, colour = Group, group = interaction(Group, ID)))
-  p = p + geom_point(size=1, alpha=0.5) + geom_line(size=1, alpha=0.7) +  theme_bw() +
-    ggtitle(paste("Feature = ", text, sep = "")) + labs(y = "Normalized Count", x = sprintf("Time (%s)", unit)) +
-    scale_colour_manual(values = c("skyblue", "pink"), breaks = c("0", "1"),
+  p = p + geom_point(size = 1, alpha = 0.5) + geom_line(size = 1, alpha = 0.7) +  theme_bw() +
+    ggtitle(paste("Feature = ", text, sep = "")) + labs(y = ylabel, x = sprintf("Time (%s)", unit)) +
+    scale_colour_manual(values = col, breaks = c("0", "1"),
                         labels = c(group.levels[1], group.levels[2])) +
     theme(axis.text.x = element_text(colour="black", size=12, angle=0, hjust=0.5, vjust=0.5, face="bold"),
           axis.text.y = element_text(colour="black", size=12, angle=0, hjust=0.5, vjust=0.5, face="bold"),
@@ -62,7 +62,7 @@ visualizeFeature = function (df, text, group.levels, unit = "days")
 #' @references
 #' Ahmed Metwally (ametwa2@uic.edu)
 #' @export
-visualizeFeatureSpline = function (df, model, method, text, group.levels, unit = "days")
+visualizeFeatureSpline = function (df, model, method, text, group.levels, unit = "days", ylabel = "Normalized Count", col = c("blue", "firebrick"))
 { 
   cat("Visualizing Splines of Feature = ", text, "\n")
     
@@ -79,9 +79,8 @@ visualizeFeatureSpline = function (df, model, method, text, group.levels, unit =
   
   p = ggplot(dm, aes(Time, Count, colour = Group, group = interaction(Group, ID)))
   p = p + theme_bw() + geom_point(size=1, alpha=0.5) + geom_line(aes(linetype=lnn), size=1, alpha=0.5) + 
-    ggtitle(paste("Feature = ", text, sep = "")) + labs(y = "Normalized Count", x = sprintf("Time (%s)", unit)) +
-    scale_colour_manual(values = c("skyblue", "pink", "blue", "firebrick",
-                                   "blue",  "blue",  "firebrick", "firebrick"), 
+    ggtitle(paste("Feature = ", text, sep = "")) + labs(y = ylabel, x = sprintf("Time (%s)", unit)) +
+    scale_colour_manual(values = c(col, col), 
                         breaks = c("0", "1", "fit.0", "fit.1"),
                         labels = c(group.levels[1], group.levels[2], paste(group.levels[1], ".fit", sep=""), paste(group.levels[2], ".fit", sep="")))+
     theme(axis.text.x = element_text(colour="black", size=12, angle=0, hjust=0.5, vjust=0.5, face="bold"),
@@ -95,35 +94,6 @@ visualizeFeatureSpline = function (df, model, method, text, group.levels, unit =
   ggsave(filename=paste("Feature_", text, "_CurveFitting_", method, ".jpg", sep=""), dpi = 1200, height = 10, width = 15, units = 'cm')
 }
 
-
-#' Visualize Area Ratio (AR) empirical distribution
-#'
-#' Visualize Area Ratio (AR) empirical distribution for each time interval
-#'
-#' @param permuted Permutation of the permuted data
-#' @param text Feature name
-#' @param method fitting method
-#' @import ggplot2
-#' @import grDevices
-#' @import graphics
-#' @references
-#' Ahmed Metwally (ametwa2@uic.edu)
-#' @export
-visualizeARHistogram = function(permuted, text, method){
-  cat("Visualizing AR Distribution for Feature = ", text, "\n")
-  n = ncol(permuted)
-  r = ceiling(sqrt(n))
-  c = ceiling(sqrt(n))
-	jpeg(paste("Feature_", text, "_AR_distribution_", method, ".jpg", sep = ""), res = 1200, height = r*5, width = c*5, units = 'cm')
-  par(mfrow=c(r,c))
-  
-  for( i in 1:ncol(permuted)){
-    hist(permuted[,i], xlab = "AR Ratio", ylab = "Frequency", 
-         breaks = 10, col = "yellow", border = "red", 
-         main = paste("Interval # ", i, sep=""), xlim = c(0,1))
-  }
-  dev.off()
-}
 
 
 
@@ -145,7 +115,7 @@ visualizeARHistogram = function(permuted, text, method){
 #' @references
 #' Ahmed Metwally (ametwa2@uic.edu)
 #' @export
-visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group.levels, unit = "days")
+visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group.levels, unit = "days", ylabel = "Normalized Count", col = c("blue", "firebrick"))
 {
   cat("Visualizing Significant Intervals of Feature = ", text, "\n")
   Time = 0 ## This line is just to pass the CRAN checks for the aes in ggplot2
@@ -174,8 +144,8 @@ visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group
   dm = rbind(dd.0, dd.1)
   p1 = 'ggplot(dm, aes(Time, Count, colour = Group, group = interaction(Group, ID))) + 
   theme_bw() + geom_point(size = 1, alpha = 0.5) + geom_line(size = 1, alpha = 0.5) + 
-  ggtitle(paste("Feature = ", text, sep = "")) + labs(y = "Normalized Count", x = sprintf("Time (%s)", unit)) +
-  scale_colour_manual(values = c("blue", "firebrick"), 
+  ggtitle(paste("Feature = ", text, sep = "")) + labs(y = ylabel, x = sprintf("Time (%s)", unit)) +
+  scale_colour_manual(values = col, 
   breaks = c("fit.0", "fit.1"),
   labels = c(paste(group.levels[1], ".fit", sep = ""), paste(group.levels[2], ".fit", sep = ""))) +
   theme(axis.text.x = element_text(colour = "black", size = 12, angle = 0, hjust = 0.5, vjust = 0.5, face = "bold"),
@@ -206,7 +176,7 @@ visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group
 #' @references
 #' Ahmed Metwally (ametwa2@uic.edu)
 #' @export
-visualizeTimeIntervals = function(interval.details, prefix = "MetaLonDA_timeline", unit = "days")
+visualizeTimeIntervals = function(interval.details, prefix = "MetaLonDA_timeline", unit = "days", col = c("blue", "firebrick"))
 {
   feature=0;dominant=0;ID=0;Group=0;lnn=0 ## This line is just to pass the CRAN checks for the aes in ggplot2
   interval.details$dominant = as.factor(interval.details$dominant)
@@ -216,7 +186,7 @@ visualizeTimeIntervals = function(interval.details, prefix = "MetaLonDA_timeline
   
   ggplot(interval.details, aes(ymin = start , ymax = end, x = feature, xend = feature)) + 
     geom_linerange(aes(color = dominant), size = 1) + 
-    coord_flip() +  scale_colour_manual(values=c("blue", "firebrick")) +
+    coord_flip() +  scale_colour_manual(values = col) +
     labs(x = "Feature", y = sprintf("Time (%s)", unit), colour="Dominant") + 
      theme(axis.text.x = element_text(colour = "black", size = 10, angle = 0, hjust = 0.5, vjust = 0.5, face = "bold"),
            axis.text.y = element_text(colour = "black", size = 8, angle = 0, vjust = 0.5, face = "bold"),
@@ -228,4 +198,92 @@ visualizeTimeIntervals = function(interval.details, prefix = "MetaLonDA_timeline
           panel.grid.major.x = element_line(colour = "white",size = 0.75)) +
     theme(legend.position="top", panel.border = element_rect(colour = "black", fill = NA, size = 2))
   ggsave(filename = paste(prefix, "_MetaLonDA_TimeIntervals.jpg", sep=""), dpi = 1200, height = 30, width = 20, units = 'cm')
+}
+
+
+
+
+#' Visualize Area Ratio (AR) empirical distribution
+#'
+#' Visualize Area Ratio (AR) empirical distribution for each time interval
+#'
+#' @param permuted Permutation of the permuted data
+#' @param text Feature name
+#' @param method fitting method
+#' @import ggplot2
+#' @import grDevices
+#' @import graphics
+#' @references
+#' Ahmed Metwally (ametwa2@uic.edu)
+#' @export
+visualizeARHistogram = function(permuted, text, method){
+  cat("Visualizing AR Distribution for Feature = ", text, "\n")
+  n = ncol(permuted)
+  r = ceiling(sqrt(n))
+  c = ceiling(sqrt(n))
+  jpeg(paste("Feature_", text, "_AR_distribution_", method, ".jpg", sep = ""), res = 1200, height = r*5, width = c*5, units = 'cm')
+  par(mfrow=c(r,c))
+  
+  for( i in 1:ncol(permuted)){
+    hist(permuted[,i], xlab = "AR Ratio", ylab = "Frequency", 
+         breaks = 10, col = "yellow", border = "red", 
+         main = paste("Interval # ", i, sep=""), xlim = c(0,1))
+  }
+  dev.off()
+}
+
+
+
+#' Visualize log2 fold-change and significance of each interval as volcano plot
+#'
+#' Visualize log2 fold-change and significance of each interval as volcano plot
+#'
+#' @param df Dataframe has a detailed summary about feature's significant intervals
+#' @param text Feature name
+#' @import ggplot2
+#' @import grDevices
+#' @import graphics
+#' @references
+#' Ahmed Metwally (ametwa2@uic.edu)
+#' @export
+visualizeVolcanoPlot_optimized = function(df, text){
+  cat("Visualizing Volcano Plot of Feature = ", text, "\n")
+  # Highlight features that have an absolute log2 fold change > 1 and p-value < 0.05
+  df$adjusted.pvalue_pseudo = df$adjusted.pvalue
+  df$adjusted.pvalue_pseudo[which(df$adjusted.pvalue == 0)] = 0.00001
+  #df$threshold = as.factor((abs(df$log2FoldChange) >= 1 | abs(df$log2FoldChange) <= -1) & df$adjusted.pvalue_pseudo < 0.05)
+  
+  df$Significance <- "NS"
+  df$Significance[(abs(df$log2FoldChange) > 1)] <- "FC"
+  df$Significance[(df$adjusted.pvalue_pseudo<0.05)] <- "FDR"
+  df$Significance[(df$adjusted.pvalue_pseudo<0.05) & (abs(df$log2FoldChange)>1)] <- "FC_FDR"
+  table(df$Significance)
+  df$Significance <- factor(df$Significance, levels=c("NS", "FC", "FDR", "FC_FDR"))
+  
+  
+  ggplot(data=df, aes(x=log2FoldChange, y=-log10(adjusted.pvalue_pseudo), colour=Significance)) +
+    geom_point(alpha=0.4, size=1.75) + theme_bw() +
+    ggtitle(paste("Feature = ", text, sep = "")) +
+    xlab("log2 fold change") + ylab("-log10 p-value") +
+    theme(axis.text.x = element_text(colour="black", size=12, angle=0, hjust=0.5, vjust=0.5, face="bold"),
+          axis.text.y = element_text(colour="black", size=12, angle=0, hjust=0.5, vjust=0.5, face="bold"),
+          axis.title.x = element_text(colour="black", size=12, angle=0, hjust=.5, vjust=0.5, face="bold"),
+          axis.title.y = element_text(colour="black", size=12, angle=90, hjust=.5, vjust=.5, face="bold"),
+          legend.text=element_text(size=10, face="plain"), legend.title = element_blank(),
+          plot.title = element_text(hjust = 0.5), legend.position="bottom") +
+    
+    scale_color_manual(values=c(NS="grey30", FC="forestgreen", FDR="royalblue", FC_FDR="red2"), 
+                       labels=c(NS="NS", FC=paste("Log2FC>|", 1, "|", sep=""), FDR=paste("FDR Q<", 0.05, sep=""), 
+                                FC_FDR=paste("FDR Q<", 0.05, " & Log2FC>|", 1, "|", sep=""))) +
+    
+    #Tidy the text labels for a subset of genes
+    geom_text(data=subset(df, adjusted.pvalue_pseudo<0.05 & abs(log2FoldChange)>=1),
+              aes(label=rownames(subset(df, adjusted.pvalue_pseudo<0.05 & abs(log2FoldChange)>= 1))),
+              size=2.25,
+              #segment.color="black", #This and the next parameter spread out the labels and join them to their points by a line
+              #segment.size=0.01,
+              check_overlap=TRUE,
+              vjust=1.0)+
+    geom_vline(xintercept=c(-1,1), linetype="dotted") + geom_hline(yintercept=-log10(0.05), linetype="dotted") +
+    ggsave(filename = paste("Feature_", text, "_VolcanoPlot.jpg", sep=""), dpi = 1200, height = 12, width = 12, units = 'cm')
 }
