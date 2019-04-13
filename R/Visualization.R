@@ -25,7 +25,8 @@
 #' aggregate.df = data.frame(Count = metalonda_test_data[1,], Time = Time, Group = Group, ID = ID)
 #' visualizeFeature(aggregate.df, text = rownames(metalonda_test_data)[1], Group)
 #' @export
-visualizeFeature = function (df, text, group.levels, unit = "days", ylabel = "Normalized Count", col = c("blue", "firebrick"))
+visualizeFeature = function (df, text, group.levels, unit = "days", ylabel = "Normalized Count", 
+                             col = c("blue", "firebrick"), prefix = "Test")
 {
   cat("Visualizing Feature = ", text, "\n")
   Count=0; Time=0; ID=0; Group=0 ## This line is just to pass the CRAN checks for the aes in ggplot2
@@ -42,8 +43,10 @@ visualizeFeature = function (df, text, group.levels, unit = "days", ylabel = "No
           legend.text=element_text(size=15, face="plain"), legend.title = element_blank(), 
           plot.title = element_text(hjust = 0.5)) +
     theme(legend.position="top") + scale_x_continuous(breaks = waiver())
-
-  ggsave(filename=paste("Feature_", text, ".jpg", sep=""), dpi = 1200, height = 10, width = 15, units = 'cm')
+  
+  #print("Prefix = ", prefix)
+  #ggsave(filename=paste("Feature_", text, ".jpg", sep=""), dpi = 1200, height = 10, width = 15, units = 'cm')
+  ggsave(filename=paste(prefix, "/", "Feature_", text, ".jpg", sep=""), dpi = 1200, height = 10, width = 15, units = 'cm')
 }
 
 
@@ -66,7 +69,8 @@ visualizeFeature = function (df, text, group.levels, unit = "days", ylabel = "No
 #' @references
 #' Ahmed Metwally (ametwall@stanford.edu)
 #' @export
-visualizeFeatureSpline = function (df, model, method, text, group.levels, unit = "days", ylabel = "Normalized Count", col = c("blue", "firebrick"))
+visualizeFeatureSpline = function (df, model, method, text, group.levels, unit = "days", ylabel = "Normalized Count", 
+                                   col = c("blue", "firebrick"), prefix = "Test")
 { 
   cat("Visualizing Splines of Feature = ", text, "\n")
     
@@ -95,7 +99,7 @@ visualizeFeatureSpline = function (df, model, method, text, group.levels, unit =
           plot.title = element_text(hjust = 0.5)) +
     theme(legend.position="top") + scale_x_continuous(breaks = waiver()) + guides(linetype=FALSE, size =FALSE)
   
-  ggsave(filename=paste("Feature_", text, "_CurveFitting_", method, ".jpg", sep=""), dpi = 1200, height = 10, width = 15, units = 'cm')
+  ggsave(filename=paste(prefix, "/", "Feature_", text, "_CurveFitting_", method, ".jpg", sep=""), dpi = 1200, height = 10, width = 15, units = 'cm')
 }
 
 
@@ -121,7 +125,8 @@ visualizeFeatureSpline = function (df, model, method, text, group.levels, unit =
 #' @references
 #' Ahmed Metwally (ametwall@stanford.edu)
 #' @export
-visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group.levels, unit = "days", ylabel = "Normalized Count", col = c("blue", "firebrick"))
+visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group.levels, unit = "days", 
+                         ylabel = "Normalized Count", col = c("blue", "firebrick"), prefix = "Test")
 {
   cat("Visualizing Significant Intervals of Feature = ", text, "\n")
   Time = 0 ## This line is just to pass the CRAN checks for the aes in ggplot2
@@ -164,7 +169,7 @@ visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group
   p2 = xx  
   p3 = paste(p1, p2, sep="+")
   p = eval(parse(text = p3))
-  ggsave(filename=paste("Feature_", text, "_SignificantInterval_", method, ".jpg", sep=""), dpi = 1200, height = 10, width = 15, units = 'cm')
+  ggsave(filename=paste(prefix, "/", "Feature_", text, "_SignificantInterval_", method, ".jpg", sep=""), dpi = 1200, height = 10, width = 15, units = 'cm')
 }
 
 
@@ -183,7 +188,8 @@ visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group
 #' @references
 #' Ahmed Metwally (ametwall@stanford.edu)
 #' @export
-visualizeTimeIntervals = function(interval.details, prefix = "MetaLonDA_timeline", unit = "days", col = c("blue", "firebrick"))
+visualizeTimeIntervals = function(interval.details, prefix = "Test", unit = "days", 
+                                  col = c("blue", "firebrick"))
 {
   feature=0;dominant=0;ID=0;Group=0;lnn=0 ## This line is just to pass the CRAN checks for the aes in ggplot2
   interval.details$dominant = as.factor(interval.details$dominant)
@@ -204,7 +210,7 @@ visualizeTimeIntervals = function(interval.details, prefix = "MetaLonDA_timeline
           panel.grid.major.y = element_line(colour = "white", size = 6),
           panel.grid.major.x = element_line(colour = "white",size = 0.75)) +
     theme(legend.position="top", panel.border = element_rect(colour = "black", fill = NA, size = 2))
-  ggsave(filename = paste(prefix, "_MetaLonDA_TimeIntervals.jpg", sep=""), dpi = 1200, height = 30, width = 20, units = 'cm')
+  ggsave(filename = paste(prefix, "/", prefix, "_MetaLonDA_TimeIntervals.jpg", sep=""), dpi = 1200, height = 30, width = 20, units = 'cm')
 }
 
 
@@ -223,12 +229,12 @@ visualizeTimeIntervals = function(interval.details, prefix = "MetaLonDA_timeline
 #' @references
 #' Ahmed Metwally (ametwall@stanford.edu)
 #' @export
-visualizeARHistogram = function(permuted, text, method){
+visualizeARHistogram = function(permuted, text, method, prefix = "Test"){
   cat("Visualizing AR Distribution for Feature = ", text, "\n")
   n = ncol(permuted)
   r = ceiling(sqrt(n))
   c = ceiling(sqrt(n))
-  xx = paste("Feature_", text, "_AR_distribution_", method, ".jpg", sep = "")
+  xx = paste(prefix, "/", "Feature_", text, "_AR_distribution_", method, ".jpg", sep = "")
   jpeg(filename = xx, res = 1200, height = r*5, width = c*5, units = 'cm')
   
   par(mfrow=c(r,c))
@@ -254,7 +260,7 @@ visualizeARHistogram = function(permuted, text, method){
 #' @references
 #' Ahmed Metwally (ametwall@stanford.edu)
 #' @export
-visualizeVolcanoPlot = function(df, text){
+visualizeVolcanoPlot = function(df, text, prefix = "Test"){
   adjusted.pvalue_pseudo=0; Significance=0; log2FoldChange=0 ## This line is just to pass the CRAN checks
   
   cat("Visualizing Volcano Plot of Feature = ", text, "\n")
@@ -294,5 +300,5 @@ visualizeVolcanoPlot = function(df, text){
               check_overlap=TRUE,
               vjust=1.0)+
     geom_vline(xintercept=c(-1,1), linetype="dotted") + geom_hline(yintercept=-log10(0.05), linetype="dotted") +
-    ggsave(filename = paste("Feature_", text, "_VolcanoPlot.jpg", sep=""), dpi = 1200, height = 12, width = 12, units = 'cm')
+    ggsave(filename = paste(prefix, "/", "Feature_", text, "_VolcanoPlot.jpg", sep=""), dpi = 1200, height = 12, width = 12, units = 'cm')
 }
