@@ -8,6 +8,7 @@
 #' @param unit time interval unit
 #' @param col two color to be used for the two groups (eg., c("red", "blue")).
 #' @param ylabel text to be shown on the y-axis of all generated figures (default: "Normalized Count")
+#' @param prefix prefix to be used to create directory for the analysis results
 #' @import ggplot2
 #' @import grDevices
 #' @import graphics
@@ -15,6 +16,7 @@
 #' Ahmed Metwally (ametwall@stanford.edu)
 #' @examples 
 #' data(metalonda_test_data)
+#' dir.create(file.path("Test"))
 #' n.sample = 5
 #' n.timepoints = 10
 #' n.group = 2
@@ -63,6 +65,7 @@ visualizeFeature = function (df, text, group.levels, unit = "days", ylabel = "No
 #' @param unit time unit used in the Time vector (hours, days, weeks, months, etc.)
 #' @param col two color to be used for the two groups (eg., c("red", "blue")).
 #' @param ylabel text to be shown on the y-axis of all generated figures (default: "Normalized Count")
+#' @param prefix prefix to be used to create directory for the analysis results
 #' @import ggplot2
 #' @import grDevices
 #' @import graphics
@@ -119,6 +122,7 @@ visualizeFeatureSpline = function (df, model, method, text, group.levels, unit =
 #' @param unit time unit used in the Time vector (hours, days, weeks, months, etc.)
 #' @param col two color to be used for the two groups (eg., c("red", "blue")).
 #' @param ylabel text to be shown on the y-axis of all generated figures (default: "Normalized Count")
+#' @param prefix prefix to be used to create directory for the analysis results
 #' @import ggplot2
 #' @import grDevices
 #' @import graphics
@@ -226,6 +230,7 @@ visualizeTimeIntervals = function(interval.details, prefix = "Test", unit = "day
 #' @import ggplot2
 #' @import grDevices
 #' @import graphics
+#' @param prefix prefix to be used to create directory for the analysis results
 #' @references
 #' Ahmed Metwally (ametwall@stanford.edu)
 #' @export
@@ -258,6 +263,7 @@ visualizeARHistogram = function(permuted, text, method, prefix = "Test"){
 #' @import ggplot2
 #' @import grDevices
 #' @import graphics
+#' @param prefix prefix to be used to create directory for the analysis results
 #' @references
 #' Ahmed Metwally (ametwall@stanford.edu)
 #' @export

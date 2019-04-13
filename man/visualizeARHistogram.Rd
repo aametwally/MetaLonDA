@@ -4,7 +4,7 @@
 \alias{visualizeARHistogram}
 \title{Visualize Area Ratio (AR) empirical distribution}
 \usage{
-visualizeARHistogram(permuted, text, method)
+visualizeARHistogram(permuted, text, method, prefix = "Test")
 }
 \arguments{
 \item{permuted}{Permutation of the permuted data}
@@ -12,6 +12,8 @@ visualizeARHistogram(permuted, text, method)
 \item{text}{Feature name}
 
 \item{method}{fitting method}
+
+\item{prefix}{prefix to be used to create directory for the analysis results}
 }
 \description{
 Visualize Area Ratio (AR) empirical distribution for each time interval

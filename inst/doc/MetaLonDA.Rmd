@@ -11,7 +11,7 @@ vignette: >
 
 
 ## Introduction
-MetaLonDA (METAgenomic LONgitudinal Differential Abundance method) is a method that identifies significant time intervals of microbial features in longitudinal studies. MetaLonDA has the ability to handle inconsistencies and common challenges associated with human studies, such as variable sample collection times and uneven number of time points along the subjects’ longitudinal study. The method employs a negative binomial distribution in conjunction with a semi-parametric SS-ANOVA to model the count reads. Then, it performs the significance testing based on unit time intervals using permutation testing procedure.
+MetaLonDA (METAgenomic LONgitudinal Differential Abundance method) is a method that identifies the significant time intervals of microbial features in longitudinal studies. MetaLonDA has the ability to handle the inconsistencies and common challenges associated with human studies, such as variable sample collection times and uneven number of time points along the subjects’ longitudinal study. The method employs a negative binomial distribution in conjunction with a semi-parametric SS-ANOVA to model the read counts. Then, it performs the significance testing based on unit time intervals using permutation testing procedure.
 
  
 ## Example
@@ -35,24 +35,25 @@ ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 
 ## Define the prediction timeponits 
 points = seq(1, 10, length.out = 100)
+## Identify significant time intervals of the 5th feature: 
 output.metalonda.f5 = metalonda(Count = metalonda_test_data[5,], Time = Time, Group = Group,
-                                ID = ID, n.perm = 20, fit.method = "nbinomial", points = points,
-                                text = rownames(metalonda_test_data)[5], parall = FALSE, pvalue.threshold = 0.05,     
-                                adjust.method = "BH", time.unit = "hours", ylabel = "Read Counts", col = c("chartreuse",
-                                                                                                           "blue4"))
+                                ID = ID, n.perm = 10, fit.method = "nbinomial", points = points,
+                                text = rownames(metalonda_test_data)[5], parall = FALSE, pvalue.threshold = 0.05,
+                                adjust.method = "BH", time.unit = "days", ylabel = "Normalized Count",
+                                col = c("black", "green"), prefix = "Test_F5")
 ```
 
 
-In our example, we used 20 permutations just to showcase how MetaLonDA works. In real analysis, this number should be at least 1000.
+In our example, we used 10 permutations just to showcase how MetaLonDA works. In real analysis, this number should be at least 1000.
 
 ### Test all features
 ```{r}
 ## Identify significant time intervals for all features: 
 output.metalonda.all = metalondaAll(Count = metalonda_test_data, Time = Time, Group = Group,
-                                    ID = ID, n.perm = 20, fit.method = "nbinomial", num.intervals = 100, 
+                                    ID = ID, n.perm = 10, fit.method = "nbinomial", num.intervals = 100, 
                                     parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH", time.unit = "hours", 
-                                    norm.method = "none", prefix = "Test", ylabel = "Read Counts", col = c("chartreuse",
-                                                                                                           "blue4"))
+                                    norm.method = "none", prefix = "Test_metalondaALL", ylabel = "Read Counts",
+                                    col = c("black", "green"))
 ```
 
 

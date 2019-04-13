@@ -4,9 +4,9 @@
 \alias{visualizeArea}
 \title{Visualize significant time interval}
 \usage{
-visualizeArea(aggregate.df, model.ss, method, start, end, text, group.levels,
-  unit = "days", ylabel = "Normalized Count", col = c("blue",
-  "firebrick"))
+visualizeArea(aggregate.df, model.ss, method, start, end, text,
+  group.levels, unit = "days", ylabel = "Normalized Count",
+  col = c("blue", "firebrick"), prefix = "Test")
 }
 \arguments{
 \item{aggregate.df}{Dataframe has the Count, Group, ID, Time}
@@ -28,6 +28,8 @@ visualizeArea(aggregate.df, model.ss, method, start, end, text, group.levels,
 \item{ylabel}{text to be shown on the y-axis of all generated figures (default: "Normalized Count")}
 
 \item{col}{two color to be used for the two groups (eg., c("red", "blue")).}
+
+\item{prefix}{prefix to be used to create directory for the analysis results}
 }
 \description{
 Visualize significant time interval

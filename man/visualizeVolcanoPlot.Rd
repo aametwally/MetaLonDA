@@ -4,12 +4,14 @@
 \alias{visualizeVolcanoPlot}
 \title{Visualize log2 fold-change and significance of each interval as volcano plot}
 \usage{
-visualizeVolcanoPlot(df, text)
+visualizeVolcanoPlot(df, text, prefix = "Test")
 }
 \arguments{
 \item{df}{Dataframe has a detailed summary about feature's significant intervals}
 
 \item{text}{Feature name}
+
+\item{prefix}{prefix to be used to create directory for the analysis results}
 }
 \description{
 Visualize log2 fold-change and significance of each interval as volcano plot

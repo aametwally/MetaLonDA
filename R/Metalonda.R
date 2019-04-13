@@ -16,6 +16,7 @@
 #' @param time.unit time unit used in the Time vector (hours, days, weeks, months, etc.)
 #' @param col two color to be used for the two groups (eg., c("red", "blue")).
 #' @param ylabel text to be shown on the y-axis of all generated figures (default: "Normalized Count")
+#' @param prefix prefix to be used to create directory for the analysis results
 #' @return returns a list of the significant time intervals for the tested feature.
 #' @import parallel
 #' @import doParallel

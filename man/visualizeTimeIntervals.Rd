@@ -4,7 +4,7 @@
 \alias{visualizeTimeIntervals}
 \title{Visualize all significant time intervals for all tested features}
 \usage{
-visualizeTimeIntervals(interval.details, prefix = "MetaLonDA_timeline",
+visualizeTimeIntervals(interval.details, prefix = "Test",
   unit = "days", col = c("blue", "firebrick"))
 }
 \arguments{

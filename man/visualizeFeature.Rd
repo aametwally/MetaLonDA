@@ -5,7 +5,8 @@
 \title{Visualize Longitudinal Feature}
 \usage{
 visualizeFeature(df, text, group.levels, unit = "days",
-  ylabel = "Normalized Count", col = c("blue", "firebrick"))
+  ylabel = "Normalized Count", col = c("blue", "firebrick"),
+  prefix = "Test")
 }
 \arguments{
 \item{df}{dataframe has the Count, Group, ID, Time}
@@ -19,12 +20,15 @@ visualizeFeature(df, text, group.levels, unit = "days",
 \item{ylabel}{text to be shown on the y-axis of all generated figures (default: "Normalized Count")}
 
 \item{col}{two color to be used for the two groups (eg., c("red", "blue")).}
+
+\item{prefix}{prefix to be used to create directory for the analysis results}
 }
 \description{
 Visualize Longitudinal Feature
 }
 \examples{
 data(metalonda_test_data)
+dir.create(file.path("Test"))
 n.sample = 5
 n.timepoints = 10
 n.group = 2
