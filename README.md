@@ -42,7 +42,7 @@ install.packages("MetaLonDA")
 Download the latest development code of MetaLonDA from GitHub using devtools
 ```
 library(devtools)
-install_github("aametwally/MetaLonDA", ref = "v1.1.2")
+install_github("aametwally/MetaLonDA", ref = "master")
 ```
 
 
