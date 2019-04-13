@@ -184,14 +184,20 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
                         dominant = interval$dominant, pvalue = interval$pvalue)
 
   
-  ## Output table and volcano plot that summarize time intervals statistics
+  ## Output table summarizing time intervals statistics
+  output.details$points = output.details$points[-length(output.details$points)]
   feature.summary = as.data.frame(do.call(cbind, output.details), stringsAsFactors = FALSE)
   write.csv(feature.summary, file = sprintf("%s/Feature_%s_Summary.csv", prefix, text), row.names = FALSE)
-  x = as.data.frame(sapply(feature.summary[, c("foldChange","log2FoldChange", "intervals.pvalue", "adjusted.pvalue")], as.numeric))
-  #visualizeVolcanoPlot(df = x, text, prefix = prefix)
+  
+  
+  aggregateData = list(feature.detail = output.details, feature.summary = feature.summary, feature.model = model)
+  save(aggregateData, 
+       file = sprintf("%s/Feature_%s_Summary_%s.RData",
+                      prefix, text, fit.method))
   cat("\n\n")
   
-  return(list(detailed = output.details, summary = output.summary))
+  
+  return(list(detailed = output.details, summary = output.summary, model = model))
 }
 
 
@@ -305,6 +311,7 @@ metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
   n.features = nrow(data.count.filt)
   detailed = list()
   summary = list()
+  model = list()
   for (i in 1:n.features)
   {
     cat ("Feature  = ", rownames(data.count.filt)[i], "\n")
@@ -315,6 +322,7 @@ metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
     
     detailed[[i]] = out$detailed
     summary[[i]] = out$summary
+    model[[i]] = out$model
   }
   
   summary.tmp = do.call(rbind, summary)
@@ -326,7 +334,7 @@ metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
   visualizeTimeIntervals(interval.details = summary.tmp, prefix, unit = time.unit, col = col)
   
   
-  aggregateData = list(output.detail = detailed, output.summary = summary.tmp)
+  aggregateData = list(output.detail = detailed, output.summary = summary.tmp, output.model = model)
   save(aggregateData, file = sprintf("%s/%s_MetaLonDA.RData", prefix, prefix))
   return(aggregateData)
 }
