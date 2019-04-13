@@ -5,7 +5,8 @@
 \title{Visualize significant time interval}
 \usage{
 visualizeArea(aggregate.df, model.ss, method, start, end, text, group.levels,
-  unit = "days")
+  unit = "days", ylabel = "Normalized Count", col = c("blue",
+  "firebrick"))
 }
 \arguments{
 \item{aggregate.df}{Dataframe has the Count, Group, ID, Time}
@@ -23,10 +24,14 @@ visualizeArea(aggregate.df, model.ss, method, start, end, text, group.levels,
 \item{group.levels}{Level's name}
 
 \item{unit}{time unit used in the Time vector (hours, days, weeks, months, etc.)}
+
+\item{ylabel}{text to be shown on the y-axis of all generated figures (default: "Normalized Count")}
+
+\item{col}{two color to be used for the two groups (eg., c("red", "blue")).}
 }
 \description{
 Visualize significant time interval
 }
 \references{
-Ahmed Metwally (ametwa2@uic.edu)
+Ahmed Metwally (ametwall@stanford.edu)
 }

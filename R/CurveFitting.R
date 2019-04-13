@@ -9,7 +9,7 @@
 #' @import gss
 #' @import stats
 #' @references
-#' Ahmed Metwally (ametwa2@uic.edu)
+#' Ahmed Metwally (ametwall@stanford.edu)
 #' @examples 
 #' data(metalonda_test_data)
 #' n.sample = 5 
@@ -126,9 +126,15 @@ curveFitting = function(df, method = "nbinomial", points){
 #' 
 #' @param curve.fit.df gss data object of the fitted spline
 #' @return returns the area ratio for all time intervals
+<<<<<<< HEAD
 #' @import caTools
 #' @references
 #' Ahmed Metwally (ametwa2@uic.edu)
+=======
+#' @import pracma
+#' @references
+#' Ahmed Metwally (ametwall@stanford.edu)
+>>>>>>> v1.1.5
 #' @examples 
 #' data(metalonda_test_data)
 #' n.sample = 5
@@ -176,7 +182,7 @@ intervalArea = function(curve.fit.df){
 #' @param sign vector hold area sign of each time interval 
 #' @return returns a list of the start and end points of all significant time intervals
 #' @references
-#' Ahmed Metwally (ametwa2@uic.edu)
+#' Ahmed Metwally (ametwall@stanford.edu)
 #' @examples 
 #' p = c(0.04, 0.01, 0.02, 0.04, 0.06, 0.2, 0.06, 0.04)
 #' sign = c(1, 1, 1, 1, -1, -1, 1, 1)
@@ -256,7 +262,7 @@ findSigInterval = function(adjusted.pvalue, threshold = 0.05, sign)
 #' @param perm list has all the permutated models
 #' @return returns a list of all permutation area ratio
 #' @references
-#' Ahmed Metwally (ametwa2@uic.edu)
+#' Ahmed Metwally (ametwall@stanford.edu)
 #' @examples 
 #' data(metalonda_test_data)
 #' n.sample = 5 # sample size;

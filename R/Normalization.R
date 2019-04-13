@@ -5,7 +5,7 @@
 #' @param count count matrix
 #' @param method normalization method
 #' @references
-#' Ahmed Metwally (ametwa2@uic.edu)
+#' Ahmed Metwally (ametwall@stanford.edu)
 #' @export
 normalize = function(count, method = "css"){
  # col.data=0 ## this line is for CRAN package

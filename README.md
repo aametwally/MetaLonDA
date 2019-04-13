@@ -21,7 +21,7 @@ MetaLonDA (METAgenomic LONgitudinal Differential Abundance method) is a method t
 <br>
 
 # Getting Started
-This section details steps for installing and running MetaLonDA. If you experience difficulty installing or running the software, please contact (Ahmed Metwally: ametwa2@uic.edu).
+This section details steps for installing and running MetaLonDA. If you experience difficulty installing or running the software, please contact (Ahmed Metwally: ametwall@stanford.edu).
 
 ## Prerequisites
 
@@ -42,7 +42,7 @@ install.packages("MetaLonDA")
 Download the latest development code of MetaLonDA from GitHub using devtools
 ```
 library(devtools)
-install_github("aametwally/MetaLonDA", ref = "master")
+install_github("aametwally/MetaLonDA", ref = "v1.1.2")
 ```
 
 
@@ -72,7 +72,7 @@ Group = factor(c(rep("A", n.sample*n.timepoints), rep("B",n.sample*n.timepoints)
 Time = rep(rep(1:n.timepoints, times = n.sample), 2)
 ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 
-## Define the prediction timepoints 
+## Define the prediction timeponits 
 points = seq(1, 10, length.out = 100)
 ```
 
@@ -82,11 +82,12 @@ points = seq(1, 10, length.out = 100)
 ## Identify significant time intervals of the 5th feature: 
 output.metalonda.f5 = metalonda(Count = metalonda_test_data[5,], Time = Time, Group = Group,
                                 ID = ID, n.perm = 100, fit.method = "nbinomial", points = points,
-                                text = rownames(metalonda_test_data)[5], parall = FALSE, pvalue.threshold = 0.05,     
-                                adjust.method = "BH", col = c("black", "green"))
+                                text = rownames(metalonda_test_data)[5], parall = FALSE, pvalue.threshold = 0.05,
+                                adjust.method = "BH", time.unit = "days", ylabel = "Normalized Count",
+                                col = c("black", "green"), prefix = "Test_F5")
 ```
 
-In our example, we used 100 permutations just to showcase how MetaLonDA works. In real analysis, this number should be much higher. Three figures are generated after running the above snippet:
+In our example, we used 20 permutations just to showcase how MetaLonDA works. In real analysis, this number should be much higher. Three figures are generated after running the above snippet:
 
 
 <br> 
@@ -115,7 +116,8 @@ In our example, we used 100 permutations just to showcase how MetaLonDA works. I
 output.metalonda.all = metalondaAll(Count = metalonda_test_data, Time = Time, Group = Group,
                                     ID = ID, n.perm = 100, fit.method = "nbinomial", num.intervals = 100, 
                                     parall = FALSE, pvalue.threshold = 0.05, adjust.method = "BH", time.unit = "hours", 
-                                    norm.method = "none", prefix = "Test", ylabel = "Read Counts", col = c("black","green"))
+                                    norm.method = "none", prefix = "Test_metalondaALL", ylabel = "Read Counts",
+                                    col = c("black", "green"))
   
 ```
 
@@ -130,11 +132,10 @@ After running the above snippet for testing all features in the count matrix, al
 
 
 <br><br>
-2. Descriptive summary all signifcant time intervals of differentially abundant features
-<img src="docs/Test_MetaLonDA_TimeIntervals_summary.png">
+2. Descriptive summary all signifcant time intervals of differentially abundant features.
 
 
 <br>
 
 ### Bugs and Suggestions
-MetaLonDA is under active research development. Please report any bugs/suggestions to Ahmed Metwally (ametwa2@uic.edu).
+MetaLonDA is under active research development. Please report any bugs/suggestions to Ahmed Metwally (ametwall@stanford.edu).

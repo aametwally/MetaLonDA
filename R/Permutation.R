@@ -7,11 +7,12 @@
 #' @param method The fitting method (negative binomial, LOWESS)
 #' @param points The points at which the prediction should happen
 #' @param lev the two level's name
+#' @param parall boolean to indicate whether to use multicore.
 #' @return returns the fitted model for all the permutations
 #' @import plyr
 #' @import utils
 #' @references
-#' Ahmed Metwally (ametwa2@uic.edu)
+#' Ahmed Metwally (ametwall@stanford.edu)
 #' @examples 
 #' data(metalonda_test_data)
 #' n.sample = 5
@@ -25,28 +26,37 @@
 #' aggregate.df = data.frame(Count = metalonda_test_data[1,], Time = Time, Group = Group, ID = ID)
 #' prm = permutation(aggregate.df, n.perm = 3, method = "nbinomial", points)
 #' @export
-permutation = function(perm.dat, n.perm = 500, method = "nbinomial", points, lev){
-
-  n.subjects = length(unique(perm.dat$ID))
-  cat("# of Subjects = ", n.subjects, "\n")
+permutation = function(perm.dat, n.perm = 500, method = "nbinomial", points, lev, parall = FALSE){
   
   ## Start permutation
+  cat("Start Permutation \n")
   pp = list() 
   perm = 0 # to be able to store the value
+  n.subjects = length(unique(perm.dat$ID))
+  #cat("# of Subjects = ", n.subjects, "\n")
+  
+  
+  ## Run in Parallel
+  if(parall == TRUE) {
+    max.cores = detectCores()
+    cat("# cores = ", max.cores, "\n")
+    desired.cores = max.cores - 1		
+    cl = makeCluster(desired.cores)
+    registerDoParallel(cl)
+  } 
+  
+  
   pp = llply(1:n.perm, function(j){
-    cat("Permutation #", j,  "\n")
-    for( i in levels(perm.dat$ID)){
+    for (i in levels(perm.dat$ID)){
       perm.uniq.len = 1
       m=0
       
       while(perm.uniq.len == 1){
-        # cat("In While m = ", m, "\n")
-        m=m+1
+        m = m + 1
         perm.dat[which(perm.dat$ID == i),]$Group = rep(sample(c(0,1),1), sum(perm.dat$ID == i))# ,  replace = TRUE) #rep(sample(1:2), each = time.point)
         perm.uniq.len = length(unique(perm.dat$Group))
       }
     }
-    
     
     g.0 = perm.dat[perm.dat$Group == 0, ]
     g.1 = perm.dat[perm.dat$Group == 1, ]
@@ -68,8 +78,14 @@ permutation = function(perm.dat, n.perm = 500, method = "nbinomial", points, lev
       perm = curveFitting(df = perm.dat, method = method, points)
       assign(paste("Model", j, sep = "_"), perm)
     }
-  }, .parallel = FALSE, .progress = "none")
+  }, .parallel = parall, .progress = "text", .inform = TRUE,
+  .paropts = list(.export=ls(.GlobalEnv),
+                .packages=.packages(all.available=T)))
     
+
+  if(parall == TRUE) {
+    stopCluster(cl)
+  }
   
   pp[sapply(pp, is.null)] = NULL
   return(pp)

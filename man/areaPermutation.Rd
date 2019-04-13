@@ -30,5 +30,5 @@ perm = permutation(aggretage.df, n.perm = 3, method = "nbinomial", points)
 areaPermutation(perm)
 }
 \references{
-Ahmed Metwally (ametwa2@uic.edu)
+Ahmed Metwally (ametwall@stanford.edu)
 }

@@ -29,5 +29,5 @@ model = curveFitting(df = aggregate.df, method= "nbinomial", points)
 intervalArea(model)
 }
 \references{
-Ahmed Metwally (ametwa2@uic.edu)
+Ahmed Metwally (ametwall@stanford.edu)
 }

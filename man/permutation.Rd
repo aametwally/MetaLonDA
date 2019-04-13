@@ -4,7 +4,8 @@
 \alias{permutation}
 \title{Permute group labels}
 \usage{
-permutation(perm.dat, n.perm = 500, method = "nbinomial", points, lev)
+permutation(perm.dat, n.perm = 500, method = "nbinomial", points, lev,
+  parall = FALSE)
 }
 \arguments{
 \item{perm.dat}{dataframe has the Count, Group, ID, Time}
@@ -16,6 +17,8 @@ permutation(perm.dat, n.perm = 500, method = "nbinomial", points, lev)
 \item{points}{The points at which the prediction should happen}
 
 \item{lev}{the two level's name}
+
+\item{parall}{boolean to indicate whether to use multicore.}
 }
 \value{
 returns the fitted model for all the permutations
@@ -37,5 +40,5 @@ aggregate.df = data.frame(Count = metalonda_test_data[1,], Time = Time, Group = 
 prm = permutation(aggregate.df, n.perm = 3, method = "nbinomial", points)
 }
 \references{
-Ahmed Metwally (ametwa2@uic.edu)
+Ahmed Metwally (ametwall@stanford.edu)
 }

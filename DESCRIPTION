@@ -1,21 +1,21 @@
 Package: MetaLonDA
 Type: Package
 Title: Metagenomics Longitudinal Differential Abundance Method
-Version: 1.1.2
-Date: 2018-6-08
+Version: 1.1.5
+Date: 2019-04-12
 Author: Ahmed A. Metwally, Yang Dai, Patricia W. Finn, David L. Perkins
-Maintainer: Ahmed A. Metwally <ametwa2@uic.edu>
+Maintainer: Ahmed A. Metwally <ametwall@stanford.edu>
 URL: https://github.com/aametwally/MetaLonDA
 BugReports: https://github.com/aametwally/MetaLonDA/issues
-Description: Identify time intervals of differentially abundant metagenomics features in longitudinal studies. (Metwally AA, et al., Microbiome, 2018 <https://doi.org/10.1186/s40168-018-0402-y>)
+Description: Identify time intervals of differentially abundant metagenomic features in longitudinal studies (Metwally AA, et al., Microbiome, 2018 <doi:10.1186/s40168-018-0402-y>).
 License: MIT + file LICENSE
 Depends:
     R(>= 3.2.0)
 Imports:  
     gss,
     plyr,
-    caTools,
     zoo,
+    pracma,
     ggplot2,
     parallel,
     doParallel,
@@ -31,3 +31,4 @@ NeedsCompilation: no
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
+VignetteBuilder: knitr
