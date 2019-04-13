@@ -126,15 +126,9 @@ curveFitting = function(df, method = "nbinomial", points){
 #' 
 #' @param curve.fit.df gss data object of the fitted spline
 #' @return returns the area ratio for all time intervals
-<<<<<<< HEAD
-#' @import caTools
-#' @references
-#' Ahmed Metwally (ametwa2@uic.edu)
-=======
 #' @import pracma
 #' @references
 #' Ahmed Metwally (ametwall@stanford.edu)
->>>>>>> v1.1.5
 #' @examples 
 #' data(metalonda_test_data)
 #' n.sample = 5
