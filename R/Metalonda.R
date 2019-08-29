@@ -84,7 +84,7 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
 
 
   ## Visualize feature's abundance accross different time points  
-  visualizeFeature(aggregate.df, text, group.levels, unit = time.unit, ylabel = ylabel, col = col, prefix = prefix)
+  #visualizeFeature(aggregate.df, text, group.levels, unit = time.unit, ylabel = ylabel, col = col, prefix = prefix)
 
   
   group.0 = aggregate.df[aggregate.df$Group == 0, ]
