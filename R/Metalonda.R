@@ -339,10 +339,10 @@ metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
   summary.tmp$dominant[which(summary.tmp$dominant == -1)] = gr.2
   
   ## Output table and figure that summarize the significant time intervals
-  write.csv(summary.tmp, file = sprintf("%s/%s_MetaLonDA_TimeIntervals.csv", prefix, prefix), row.names = FALSE)
+  write.csv(summary.tmp, file = sprintf("%s/MetaLonDA_TimeIntervals.csv", prefix), row.names = FALSE)
   visualizeTimeIntervals(interval.details = summary.tmp, prefix, unit = time.unit, col = col)
   
   aggregateData = list(output.detail = detailed, output.summary = summary.tmp, output.model = model)
-  save(aggregateData, file = sprintf("%s/%s_MetaLonDA.RData", prefix, prefix))
+  save(aggregateData, file = sprintf("%s/MetaLonDA.RData", prefix))
   return(aggregateData)
 }
