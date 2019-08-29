@@ -45,6 +45,8 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
                       adjust.method = "BH", time.unit = "days", ylabel = "Normalized Count", col = c("blue", "firebrick"),
                      prefix = "Test")
 {
+  cat("Start MetaLonDA \n")
+  
   if (!dir.exists(prefix)){
     dir.create(file.path(prefix))
   }
