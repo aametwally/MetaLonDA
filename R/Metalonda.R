@@ -46,7 +46,6 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
                      prefix = "Test")
 {
   cat("Start MetaLonDA \n")
-  
   if (!dir.exists(prefix)){
     dir.create(file.path(prefix))
   }
