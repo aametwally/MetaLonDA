@@ -45,11 +45,6 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
                       adjust.method = "BH", time.unit = "days", ylabel = "Normalized Count", col = c("blue", "firebrick"),
                      prefix = "Test")
 {
-  cat("Start MetaLonDA \n")
-  cat("STEFAN, open connections: ")
-  cat(nrow(showConnections()))
-  cat("\n")
-
   if (!dir.exists(prefix)){
     dir.create(file.path(prefix))
   }
@@ -84,7 +79,7 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
 
 
   ## Visualize feature's abundance accross different time points  
-  #visualizeFeature(aggregate.df, text, group.levels, unit = time.unit, ylabel = ylabel, col = col, prefix = prefix)
+  visualizeFeature(aggregate.df, text, group.levels, unit = time.unit, ylabel = ylabel, col = col, prefix = prefix)
 
   
   group.0 = aggregate.df[aggregate.df$Group == 0, ]
@@ -114,8 +109,8 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
   }
   
   ## Visualize feature's trajectories spline
-  #visualizeFeatureSpline(aggregate.df, model, fit.method, text, group.levels, unit = time.unit, ylabel = ylabel, 
-  #                       col = col, prefix = prefix)
+  visualizeFeatureSpline(aggregate.df, model, fit.method, text, group.levels, unit = time.unit, ylabel = ylabel, 
+                         col = col, prefix = prefix)
  
    
   ## Calculate area under the fitted curve for each time interval
@@ -192,13 +187,13 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
   ## Output table summarizing time intervals statistics
   output.details$points = output.details$points[-length(output.details$points)]
   feature.summary = as.data.frame(do.call(cbind, output.details), stringsAsFactors = FALSE)
-  #write.csv(feature.summary, file = sprintf("%s/Feature_%s_Summary.csv", prefix, text), row.names = FALSE)
+  write.csv(feature.summary, file = sprintf("%s/Feature_%s_Summary.csv", prefix, text), row.names = FALSE)
   
   
   aggregateData = list(feature.detail = output.details, feature.summary = feature.summary, feature.model = model)
-  #save(aggregateData, 
-  #     file = sprintf("%s/Feature_%s_Summary_%s.RData",
-  #                    prefix, text, fit.method))
+  save(aggregateData, 
+       file = sprintf("%s/Feature_%s_Summary_%s.RData",
+                      prefix, text, fit.method))
   cat("\n\n")
   
   
@@ -313,13 +308,10 @@ metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
   data.count.filt = as.matrix(Count)
   
   ## Apply metalonda for each feature
-  n.features = 3 #nrow(data.count.filt)
+  n.features = nrow(data.count.filt)
   detailed = list()
   summary = list()
   model = list()
-  cat("STEFAN: num featurs:")
-  cat(n.features)
-  cat("\n")
   for (i in 1:n.features)
   {
     cat ("Feature  = ", rownames(data.count.filt)[i], "\n")
