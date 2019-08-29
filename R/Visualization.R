@@ -214,7 +214,7 @@ visualizeTimeIntervals = function(interval.details, prefix = "Test", unit = "day
           panel.grid.major.y = element_line(colour = "white", size = 6),
           panel.grid.major.x = element_line(colour = "white",size = 0.75)) +
     theme(legend.position="top", panel.border = element_rect(colour = "black", fill = NA, size = 2))
-  ggsave(filename = paste(prefix, "/", prefix, "_MetaLonDA_TimeIntervals.jpg", sep=""), dpi = 1200, height = 30, width = 20, units = 'cm')
+  ggsave(filename = paste(prefix, "/MetaLonDA_TimeIntervals.jpg", sep=""), dpi = 1200, height = 30, width = 20, units = 'cm')
 }
 
 
