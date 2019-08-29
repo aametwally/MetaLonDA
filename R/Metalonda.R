@@ -114,8 +114,8 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
   }
   
   ## Visualize feature's trajectories spline
-  visualizeFeatureSpline(aggregate.df, model, fit.method, text, group.levels, unit = time.unit, ylabel = ylabel, 
-                         col = col, prefix = prefix)
+  #visualizeFeatureSpline(aggregate.df, model, fit.method, text, group.levels, unit = time.unit, ylabel = ylabel, 
+  #                       col = col, prefix = prefix)
  
    
   ## Calculate area under the fitted curve for each time interval
@@ -192,13 +192,13 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
   ## Output table summarizing time intervals statistics
   output.details$points = output.details$points[-length(output.details$points)]
   feature.summary = as.data.frame(do.call(cbind, output.details), stringsAsFactors = FALSE)
-  write.csv(feature.summary, file = sprintf("%s/Feature_%s_Summary.csv", prefix, text), row.names = FALSE)
+  #write.csv(feature.summary, file = sprintf("%s/Feature_%s_Summary.csv", prefix, text), row.names = FALSE)
   
   
   aggregateData = list(feature.detail = output.details, feature.summary = feature.summary, feature.model = model)
-  save(aggregateData, 
-       file = sprintf("%s/Feature_%s_Summary_%s.RData",
-                      prefix, text, fit.method))
+  #save(aggregateData, 
+  #     file = sprintf("%s/Feature_%s_Summary_%s.RData",
+  #                    prefix, text, fit.method))
   cat("\n\n")
   
   
