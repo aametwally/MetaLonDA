@@ -317,6 +317,9 @@ metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
   detailed = list()
   summary = list()
   model = list()
+  cat("STEFAN: num featurs:")
+  cat(n.features)
+  cat("\n")
   for (i in 1:n.features)
   {
     cat ("Feature  = ", rownames(data.count.filt)[i], "\n")
