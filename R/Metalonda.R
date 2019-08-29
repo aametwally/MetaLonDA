@@ -313,7 +313,7 @@ metalondaAll = function(Count, Time, Group, ID, n.perm = 500,
   data.count.filt = as.matrix(Count)
   
   ## Apply metalonda for each feature
-  n.features = nrow(data.count.filt)
+  n.features = 3 #nrow(data.count.filt)
   detailed = list()
   summary = list()
   model = list()
