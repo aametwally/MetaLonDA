@@ -158,7 +158,7 @@ metalonda = function(Count, Time, Group, ID, n.perm = 500, fit.method = "nbinomi
     visualizeArea(aggregate.df, model, fit.method, st, en, text, group.levels, unit = time.unit, ylabel = ylabel,
                   col = col, prefix = prefix)
   }
-  
+   
   
   ## Calculate start, end, dominant for each interval
   interval.start = points[-length(points)]

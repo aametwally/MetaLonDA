@@ -16,7 +16,8 @@
 #' Ahmed Metwally (ametwall@stanford.edu)
 #' @examples 
 #' data(metalonda_test_data)
-#' dir.create(file.path("Test"))
+#' pfx = tempfile()
+#' dir.create(file.path(pfx))
 #' n.sample = 5
 #' n.timepoints = 10
 #' n.group = 2
@@ -25,7 +26,8 @@
 #' ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 #' points = seq(1, 10, length.out = 10)
 #' aggregate.df = data.frame(Count = metalonda_test_data[1,], Time = Time, Group = Group, ID = ID)
-#' visualizeFeature(aggregate.df, text = rownames(metalonda_test_data)[1], Group)
+#' visualizeFeature(df = aggregate.df, text = rownames(metalonda_test_data)[1], 
+#' group.levels = Group, prefix = pfx)
 #' @export
 visualizeFeature = function (df, text, group.levels, unit = "days", ylabel = "Normalized Count", 
                              col = c("blue", "firebrick"), prefix = "Test")
@@ -142,7 +144,7 @@ visualizeArea = function(aggregate.df, model.ss, method, start, end, text, group
     sub.11[[i]] = subset(model.ss$dd.1, Time >= start[i] & Time <= end[i])  
     sub.10[[i]] = subset(model.ss$dd.0, Time >= start[i] & Time <= end[i])
     cmd = sprintf('geom_ribbon(data=sub.10[[%d]], aes(ymin = sub.11[[%d]]$Count, ymax = Count), colour= "grey3", fill="grey69", 
-                  alpha = "0.6")', i, i)
+                  alpha = 0.6)', i, i)
     if (i != 1)
     {
       xx = paste(xx, cmd, sep = "+")

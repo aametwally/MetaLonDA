@@ -4,11 +4,23 @@
 \alias{metalondaAll}
 \title{Metagenomic Longitudinal Differential Abundance Analysis for all Features}
 \usage{
-metalondaAll(Count, Time, Group, ID, n.perm = 500,
-  fit.method = "nbinomial", num.intervals = 100, parall = FALSE,
-  pvalue.threshold = 0.05, adjust.method = "BH", time.unit = "days",
-  norm.method = "none", prefix = "Output",
-  ylabel = "Normalized Count", col = c("blue", "firebrick"))
+metalondaAll(
+  Count,
+  Time,
+  Group,
+  ID,
+  n.perm = 500,
+  fit.method = "nbinomial",
+  num.intervals = 100,
+  parall = FALSE,
+  pvalue.threshold = 0.05,
+  adjust.method = "BH",
+  time.unit = "days",
+  norm.method = "none",
+  prefix = "Output",
+  ylabel = "Normalized Count",
+  col = c("blue", "firebrick")
+)
 }
 \arguments{
 \item{Count}{Count matrix of all features}

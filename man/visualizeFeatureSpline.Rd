@@ -4,9 +4,17 @@
 \alias{visualizeFeatureSpline}
 \title{Visualize the feature trajectory with the fitted Splines}
 \usage{
-visualizeFeatureSpline(df, model, method, text, group.levels,
-  unit = "days", ylabel = "Normalized Count", col = c("blue",
-  "firebrick"), prefix = "Test")
+visualizeFeatureSpline(
+  df,
+  model,
+  method,
+  text,
+  group.levels,
+  unit = "days",
+  ylabel = "Normalized Count",
+  col = c("blue", "firebrick"),
+  prefix = "Test"
+)
 }
 \arguments{
 \item{df}{dataframe has the Count , Group, ID, Time}

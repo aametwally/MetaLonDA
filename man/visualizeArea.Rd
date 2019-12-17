@@ -4,9 +4,19 @@
 \alias{visualizeArea}
 \title{Visualize significant time interval}
 \usage{
-visualizeArea(aggregate.df, model.ss, method, start, end, text,
-  group.levels, unit = "days", ylabel = "Normalized Count",
-  col = c("blue", "firebrick"), prefix = "Test")
+visualizeArea(
+  aggregate.df,
+  model.ss,
+  method,
+  start,
+  end,
+  text,
+  group.levels,
+  unit = "days",
+  ylabel = "Normalized Count",
+  col = c("blue", "firebrick"),
+  prefix = "Test"
+)
 }
 \arguments{
 \item{aggregate.df}{Dataframe has the Count, Group, ID, Time}

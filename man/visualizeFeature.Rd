@@ -4,9 +4,15 @@
 \alias{visualizeFeature}
 \title{Visualize Longitudinal Feature}
 \usage{
-visualizeFeature(df, text, group.levels, unit = "days",
-  ylabel = "Normalized Count", col = c("blue", "firebrick"),
-  prefix = "Test")
+visualizeFeature(
+  df,
+  text,
+  group.levels,
+  unit = "days",
+  ylabel = "Normalized Count",
+  col = c("blue", "firebrick"),
+  prefix = "Test"
+)
 }
 \arguments{
 \item{df}{dataframe has the Count, Group, ID, Time}
@@ -28,7 +34,8 @@ Visualize Longitudinal Feature
 }
 \examples{
 data(metalonda_test_data)
-dir.create(file.path("Test"))
+pfx = tempfile()
+dir.create(file.path(pfx))
 n.sample = 5
 n.timepoints = 10
 n.group = 2
@@ -37,7 +44,8 @@ Time = rep(rep(1:n.timepoints, times = n.sample), 2)
 ID = factor(rep(1:(2*n.sample), each = n.timepoints))
 points = seq(1, 10, length.out = 10)
 aggregate.df = data.frame(Count = metalonda_test_data[1,], Time = Time, Group = Group, ID = ID)
-visualizeFeature(aggregate.df, text = rownames(metalonda_test_data)[1], Group)
+visualizeFeature(df = aggregate.df, text = rownames(metalonda_test_data)[1], 
+group.levels = Group, prefix = pfx)
 }
 \references{
 Ahmed Metwally (ametwall@stanford.edu)

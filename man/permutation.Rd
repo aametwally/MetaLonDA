@@ -4,8 +4,14 @@
 \alias{permutation}
 \title{Permute group labels}
 \usage{
-permutation(perm.dat, n.perm = 500, method = "nbinomial", points, lev,
-  parall = FALSE)
+permutation(
+  perm.dat,
+  n.perm = 500,
+  method = "nbinomial",
+  points,
+  lev,
+  parall = FALSE
+)
 }
 \arguments{
 \item{perm.dat}{dataframe has the Count, Group, ID, Time}

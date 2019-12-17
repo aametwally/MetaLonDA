@@ -4,11 +4,23 @@
 \alias{metalonda}
 \title{Metagenomic Longitudinal Differential Abundance Analysis for one feature}
 \usage{
-metalonda(Count, Time, Group, ID, n.perm = 500,
-  fit.method = "nbinomial", points, text = 0, parall = FALSE,
-  pvalue.threshold = 0.05, adjust.method = "BH", time.unit = "days",
-  ylabel = "Normalized Count", col = c("blue", "firebrick"),
-  prefix = "Test")
+metalonda(
+  Count,
+  Time,
+  Group,
+  ID,
+  n.perm = 500,
+  fit.method = "nbinomial",
+  points,
+  text = 0,
+  parall = FALSE,
+  pvalue.threshold = 0.05,
+  adjust.method = "BH",
+  time.unit = "days",
+  ylabel = "Normalized Count",
+  col = c("blue", "firebrick"),
+  prefix = "Test"
+)
 }
 \arguments{
 \item{Count}{matrix has the number of reads that mapped to each feature in each sample.}
